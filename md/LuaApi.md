@@ -439,7 +439,10 @@ Uso: `applyTextMarkup(tag:String, text:String, rules:Array<Array<Dynamic>>)`
 
 Sirve para Asignarle Varios Colores a la Vez a un Texto
 
-Ejemplo: `applyTextMarkup('myText', '*ALE* #Engine# %Supremacy%', {{'*', 0x00FFFF}, {'#', 0xFF0000}, {'%', 0x00FF00}})` </br>
+Ejemplo: {% raw %}
+applyTextMarkup('myText', '*ALE* #Engine# %Supremacy%', {{'*', 0x00FFFF}, {'#', 0xFF0000}, {'%', 0x00FF00}})
+{% endraw %}
+ </br>
 <sub>Se Hace Uso de las Funciones de [Color](#color)</sub>
 
 ---
