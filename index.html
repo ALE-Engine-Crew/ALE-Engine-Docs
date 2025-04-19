@@ -11,17 +11,107 @@
 </head>
 <body>
     <nav>
-        <img src="assets/images/iconOG.png" alt="AleEngine" style="margin-right: 1em;"><strong>ALE Engine - Documentación</strong>
+        <button id="sidebar-toggle" aria-label="Abrir menú" style="background:none;border:none;cursor:pointer;margin-right:1em;">
+            <span style="font-size:2em; color:#b3c0d1;">&#9776;</span>
+        </button>
+        <img class="logo-float" src="assets/images/iconOG.png" alt="AleEngine" style="margin-right: 1em;">
+        <strong>ALE Engine - Documentación</strong>
     </nav>
     <div class="container">
-        <aside class="sidebar">
+        <aside class="sidebar" id="sidebar">
+            <button id="sidebar-close" aria-label="Cerrar menú" style="background:none;border:none;cursor:pointer;display:none;position:absolute;top:1em;right:1em;font-size:2em;color:#fff;z-index:10;">&times;</button>
             <ul>
                 <li><a href="#" onclick="loadMarkdown('md/LuaApi.md'); return false;">Lua API</a></li>
             </ul>
         </aside>
-        <main class="content">
-            <div id="markdown-content" class="markdown-body">
-                <p>Selecciona una sección de la barra de navegación para ver la documentación.</p>
+        <main class="content" id="main-content">
+            <header class="content-header" 
+                style="
+                    position: relative;
+                    display: flex; 
+                    align-items: center; 
+                    justify-content: center;
+                    gap: 2em; 
+                    margin-bottom: 1.5em;
+                    min-height: 340px;
+                    border-radius: 12px;
+                    overflow: hidden;
+                ">
+                <!-- Fondo con blur -->
+                <img src="assets/images/banner.png" alt="Banner" 
+                    style="
+                        position: absolute;
+                        top: 0;
+                        left: 0; 
+                        width: 100%; 
+                        height: 100%; 
+                        object-fit: cover; 
+                        filter: blur(10px) brightness(0.7);
+                        z-index: 0;
+                    ">
+                <!-- Contenido centrado -->
+                <div style="position: relative; z-index: 1; display: flex; align-items: center; gap: 1.5em; flex-wrap: wrap;">
+                    <img src="assets/images/iconOG.png" alt="AleEngine" style="width: 64px; height: 64px; border-radius: 12px; box-shadow: 0 2px 8px #0004;">
+                    <div style="text-align: center;">
+                        <h1 id="section-title" style="margin: 0; font-size: 2.2em; color: #fff; text-shadow: 0 2px 8px #0008;">Bienvenido a la Documentación de ALE Engine</h1>
+                        <p style="margin: 0; margin-top: 0.7em; color: #e0e0e0; text-shadow: 0 1px 4px #0008; font-size: 1.15em; font-weight: 500;">
+                            Tu referencia rápida para el desarrollo de mods con ALE Engine
+                        </p>
+                    </div>
+                </div>
+            </header>
+            <section id="markdown-content" class="markdown-body" style="padding: 2em; min-height: 200px;">
+                <div style="display: flex; align-items: start; gap: 1.5em; margin-bottom: 3em;">
+                    <img src="assets/images/iconOG.png" alt="AleEngine" style="width: 64px; height: 64px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
+                    <div>
+                        <h2 style="margin: 0; color: #fff; font-size: 1.8em;">¿Qué es ALE Engine?</h2>
+                        <p style="font-size: 1.1em; line-height: 1.8; color: #e0e0e0; margin-top: 1em;">
+                            ALE Engine nace como una evolución natural de Friday Night Funkin', diseñado por modders para modders. Nuestra meta es simple: proporcionar un motor robusto y accesible que permita a los creadores enfocarse en dar vida a sus ideas, sin preocuparse por las limitaciones técnicas.
+                        </p>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 3em;">
+                    <h3 style="color: #fff; font-size: 1.4em; margin-bottom: 1em;">Características Fundamentales</h3>
+                    <div style="color: #e0e0e0; line-height: 1.8;">
+                        <p style="margin-bottom: 1.5em;">
+                            <strong style="color: #fff; display: block; margin-bottom: 0.5em;">Rendimiento Optimizado</strong>
+                            Hemos reescrito todo el engine arreglando componentes críticos del motor para asegurar una experiencia fluida tanto en PC como en dispositivos Android, manteniendo la fidelidad visual que los jugadores esperan.
+                        </p>
+                        
+                        <p style="margin-bottom: 1.5em;">
+                            <strong style="color: #fff; display: block; margin-bottom: 0.5em;">Sistema de Scripting Avanzado</strong>
+                            Integración completa con Lua y HScript, permitiendo modificaciones profundas del gameplay sin necesidad de recompilar. Desde simples cambios visuales hasta mecánicas completamente nuevas, las posibilidades son infinitas, tu unico limite es tu mente.
+                        </p>
+                        
+                        <p style="margin-bottom: 1.5em;">
+                            <strong style="color: #fff; display: block; margin-bottom: 0.5em;">Diseño Multiplataforma</strong>
+                            Desarrollado desde cero pensando en la compatibilidad móvil, con controles adaptables y una interfaz que responde a diferentes tamaños de pantalla y métodos de entrada.
+                        </p>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 3em;">
+                    <h3 style="color: #fff; font-size: 1.4em; margin-bottom: 1em;">Para Desarrolladores</h3>
+                    <p style="color: #e0e0e0; line-height: 1.8; margin-bottom: 1.5em;">
+                        ALE Engine ofrece un entorno de desarrollo intuitivo y potente. Hemos simplificado los procesos más comunes en la creación de mods mientras mantenemos la flexibilidad que los desarrolladores necesitan:
+                    </p>
+                    <ul style="color: #e0e0e0; line-height: 1.8; list-style-type: disc; padding-left: 1.5em;">
+                        <li style="margin-bottom: 0.8em;">API documentada exhaustivamente para Lua y HScript</li>
+                        <li style="margin-bottom: 0.8em;">Sistema de eventos robusto para modificar cualquier aspecto del juego</li>
+                        <li style="margin-bottom: 0.8em;">Herramientas de depuración integradas</li>
+                        <li style="margin-bottom: 0.8em;">Flujo de trabajo optimizado para pruebas rápidas de cambios</li>
+                    </ul>
+                </div>
+
+                <div style="margin-top: 4em; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2em;">
+                    <p style="color: #e0e0e0; text-align: center; font-size: 1.1em;">
+                        Explora la documentación para descubrir todo lo que puedes crear con ALE Engine.
+                    </p>
+                </div>
+            </section>
+            <div id="loading-indicator" style="display:none; text-align:center; margin-top:2em;">
+                <span style="font-size:1.1em;">Cargando documentación...</span>
             </div>
         </main>
     </div>
