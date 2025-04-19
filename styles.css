@@ -1,0 +1,168 @@
+@font-face {
+    font-family: 'rajdhani';
+    src: url('assets/fonts/rajdhani.ttf') format('truetype');
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'rajdhani', Arial, sans-serif;
+    background: #141e2d;
+    color: #fff;
+    overflow: hidden;
+}
+
+body {
+    height: 100vh;
+    box-sizing: border-box;
+}
+
+nav {
+    background: #263043; /* Más claro que el container (#141e2d), pero más oscuro que el nav (#232c3d) */
+    color: #a6b8c9;
+    padding: 0.7em 1.5em;
+    font-size: 1.7em;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    box-shadow: 0 2px 8px 0 rgba(46, 120, 255, 0.10);
+    border-bottom: 2px solid #3a4250;
+    font-family: 'rajdhani', Arial, sans-serif;
+}
+
+nav strong {
+    font-size: 1.2em;
+    color: #b3c0d1;
+    text-shadow: 0 2px 12px #232c3d88, 0 2px 8px #2d3a8e44;
+    font-family: 'rajdhani', Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    height: calc(100vh - 70px);
+    overflow: hidden;
+    background: #232c3d;
+}
+
+.sidebar {
+    width: 250px;
+    background: #232c3d;
+    color: #fff;
+    padding: 2em 1em;
+    box-sizing: border-box;
+    overflow-y: auto; /* Permite scroll solo en la barra lateral */
+    scrollbar-width: thin;
+    scrollbar-color: #6b7a8f #263043;
+    max-height: 100%;
+    border-right: 2px solid #3a4250;
+    font-family: 'rajdhani', Arial, sans-serif;
+}
+.sidebar::-webkit-scrollbar {
+    width: 8px;
+}
+.sidebar::-webkit-scrollbar-thumb {
+    background: #6b7a8f;
+    border-radius: 4px;
+}
+.sidebar::-webkit-scrollbar-track {
+    background: #263043;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+.sidebar li {
+    margin-bottom: 1em;
+}
+.sidebar a {
+    color: #b8c4d6;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s, border-left 0.2s, background 0.2s;
+    border-left: 3px solid transparent;
+    padding-left: 0.5em;
+    font-family: 'rajdhani', Arial, sans-serif;
+}
+.sidebar a:hover {
+    color: #a6b8c9;
+    border-left: 3px solid #a6b8c9;
+    background: rgba(58, 66, 80, 0.10);
+    border-radius: 4px;
+}
+.content {
+    flex: 1;
+    padding: 2em 3em;
+    background: #141e2d;
+    overflow-y: auto; /* Permite scroll solo en el contenido central */
+    color: #fff;
+    height: 100%;
+    box-sizing: border-box;
+    scrollbar-width: thin;
+    scrollbar-color: #6b7a8f #141e2d;
+    font-family: 'rajdhani', Arial, sans-serif;
+}
+.content::-webkit-scrollbar {
+    width: 8px;
+}
+.content::-webkit-scrollbar-thumb {
+    background: #6b7a8f;
+    border-radius: 4px;
+}
+.content::-webkit-scrollbar-track {
+    background: #141e2d;
+}
+
+@media (max-width: 800px) {
+    .container {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        padding: 1em;
+        max-height: 200px;
+        border-right: none;
+        border-bottom: 2px solid #232c3d;
+    }
+    .content {
+        padding: 1em;
+    }
+}
+/* Markdown styles */
+.markdown-body h1, .markdown-body h2, .markdown-body h3 {
+    color: #a6b8c9;
+    font-family: 'rajdhani', Arial, sans-serif;
+}
+.markdown-body pre {
+    background: #232c3d;
+    color: #fff;
+    padding: 1em;
+    border-radius: 4px;
+    overflow-x: auto;
+    border-left: 4px solid #3a4250;
+    font-family: 'rajdhani', Arial, sans-serif;
+}
+.markdown-body code {
+    background: #2d3542;
+    color: #a6b8c9;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'rajdhani', Arial, sans-serif;
+}
+.markdown-body ul {
+    margin-left: 1.5em;
+}
+.markdown-body {
+    color: #fff;
+    font-family: 'rajdhani', Arial, sans-serif;
+}
+.markdown-body a {
+    color: #ffb8f6;
+    text-decoration: underline;
+    transition: color 0.2s;
+}
+.markdown-body a:hover {
+    color: #ffd6fa;
+}
