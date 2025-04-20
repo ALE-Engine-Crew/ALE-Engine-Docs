@@ -10,7 +10,8 @@ function loadMarkdown(file) {
     // Guardar la posición actual del scroll
     const currentScroll = window.scrollY;
 
-    fetch(file)
+    // DEVOLVER UNA PROMISE
+    return fetch(file)
         .then(response => {
             if (!response.ok) throw new Error('Network response was not ok');
             return response.text();

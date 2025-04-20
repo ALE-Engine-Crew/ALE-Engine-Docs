@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documentación de ALE Engine</title>
+    <title>Documentación - ALE Engine</title>
     <link rel="shortcut icon" href="assets/images/logos/FolLogo.png" type="image/x-icon">
 </head>
 <body>
@@ -17,6 +17,19 @@
     <div class="container">
         <aside class="sidebar" id="sidebar">
             <button id="sidebar-close" aria-label="Cerrar menú" style="background:none;border:none;cursor:pointer;display:none;position:absolute;top:1em;right:1em;font-size:2em;color:#fff;z-index:10;">&times;</button>
+            <!-- Agregar el buscador -->
+            <div class="sidebar-search">
+                <div class="search-input-wrapper">
+                    <input type="text" id="sidebar-search" placeholder="Buscar en la documentación...">
+                    <button class="search-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </button>
+                </div>
+                <div id="search-suggestions" class="search-suggestions"></div>
+            </div>
             <ul>
                 <li><a href="#" onclick="loadMarkdown('md/LuaApi.md'); return false;">Lua API</a></li>
             </ul>
@@ -126,6 +139,8 @@
         <script src="source/loadMd.js"></script>
         <script src="source/toast.js"></script>
         <script src="source/TOC.js"></script>
+        <script src="source/search.js"></script>
+        <script src="source/searchAutocomplete.js"></script>
     </div>
     <div class="styles">
         <link rel="stylesheet" href="assets/styles/main.css">
