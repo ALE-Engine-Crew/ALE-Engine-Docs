@@ -4,9 +4,9 @@ Bienvenido a la documentación de la API de Lua para ALE Engine. Aquí encontrar
 
 ---
 
-## General
+# General
 
-### `add(tag: String)`
+## `add(tag: String)`
 Agrega un objeto al Estado o Sub-Estado.<br>
 <sub>Solo funciona con objetos que sean subclase de FlxBasic.</sub>
 
@@ -17,7 +17,7 @@ add('theSprite')
 
 ---
 
-### `remove(tag: String)`
+## `remove(tag: String)`
 Elimina un objeto previamente añadido al Estado o Sub-Estado.<br>
 <sub>Solo funciona con objetos que ya han sido añadidos.</sub>
 
@@ -28,7 +28,7 @@ remove('theSprite')
 
 ---
 
-### `insert(position: Int, tag: String)`
+## `insert(position: Int, tag: String)`
 Inserta un objeto en una posición específica dentro del Estado o Sub-Estado.
 
 **Ejemplo:**  
@@ -38,7 +38,7 @@ insert(1, 'theSprite')
 
 ---
 
-### `debugPrint(text: Dynamic, ?color: FlxColor)`
+## `debugPrint(text: Dynamic, ?color: FlxColor)`
 Muestra un texto en pantalla y en la consola.  
 Puedes asignar un color opcional.
 
@@ -50,7 +50,7 @@ debugPrint('ALE Engine Supremacy', colorFromName('RED'))
 
 ---
 
-### `setObjectCameras(tag: String, cameras: Array<String>)`
+## `setObjectCameras(tag: String, cameras: Array<String>)`
 Cambia las cámaras en las que se muestra un objeto.
 
 **Ejemplo:**  
@@ -60,7 +60,7 @@ setObjectCameras('mySprite', {'camGame'})
 
 ---
 
-### `setVariable(name: String, value: Dynamic)`
+## `setVariable(name: String, value: Dynamic)`
 Asigna una variable al script.
 
 **Ejemplo:**  
@@ -70,7 +70,7 @@ setVariable('epicBool', true)
 
 ---
 
-### `setTag(tag: String, value: Dynamic)`
+## `setTag(tag: String, value: Dynamic)`
 Agrega o modifica una etiqueta en el script.
 
 **Ejemplo:**  
@@ -80,7 +80,7 @@ setTag('epicTag', true)
 
 ---
 
-### `switchState(fullClassPath: String, params: Array<Dynamic>)`
+## `switchState(fullClassPath: String, params: Array<Dynamic>)`
 Cambia a otro estado.
 
 **Ejemplo:**  
@@ -90,7 +90,7 @@ switchState('funkin.states.CustomState', ['CoolState'])
 
 ---
 
-### `switchToCustomState(name: String)`
+## `switchToCustomState(name: String)`
 Cambia a un estado personalizado.<br>
 <sub>Si el script no existe, se mostrará un error.</sub>
 
@@ -101,7 +101,7 @@ switchToCustomState('CoolState')
 
 ---
 
-### `openSubState(fullClassPath: String, params: Array<Dynamic>)`
+## `openSubState(fullClassPath: String, params: Array<Dynamic>)`
 Abre un sub-estado.
 
 **Ejemplo:**  
@@ -112,7 +112,7 @@ openSubState('funkin.substates.CustomSubState', ['CoolSubState'])
 
 ---
 
-### `openCustomSubState(name: String)`
+## `openCustomSubState(name: String)`
 Abre un sub-estado personalizado.<br>
 <sub>Si el script no existe, se mostrará un error.</sub>
 
@@ -124,7 +124,7 @@ openCustomSubState('CoolSubState')
 
 ---
 
-### `close()`
+## `close()`
 Cierra el sub-estado actual.<br>
 <sub>Solo disponible para sub-estados.</sub>
 

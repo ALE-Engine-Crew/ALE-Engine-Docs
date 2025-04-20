@@ -193,80 +193,6 @@ nav strong {
     background: #141e2d;
 }
 
-@media (max-width: 800px) {
-    .container {
-        flex-direction: column;
-    }
-    .sidebar {
-        width: 100%;
-        padding: 1em;
-        max-height: 200px;
-        border-right: none;
-        border-bottom: 2px solid #232c3d;
-    }
-    .content {
-        padding: 1em;
-    }
-}
-
-@media (max-width: 900px) {
-    .container {
-        flex-direction: column;
-    }
-    .sidebar {
-        width: 100%;
-        padding: 1em 0.5em;
-        order: 2;
-    }
-    .content {
-        padding: 0 0.5em 2em 0.5em;
-        order: 1;
-    }
-    .content-header {
-        min-height: 220px !important;
-        gap: 1em !important;
-    }
-}
-
-@media (max-width: 600px) {
-    nav a {
-        font-size: 1em;
-    }
-    .sidebar {
-        font-size: 1em;
-    }
-    .content-header {
-        flex-direction: column !important;
-        min-height: 160px !important;
-        gap: 0.5em !important;
-        padding: 1em 0.5em;
-    }
-    .content-header img {
-        width: 48px !important;
-        height: 48px !important;
-    }
-    .content-header h1 {
-        font-size: 1.2em !important;
-    }
-    .content-header p {
-        font-size: 1em !important;
-    }
-    .markdown-body {
-        padding: 1em !important;
-    }
-}
-
-/* NAV más pequeño en móvil */
-@media (max-width: 600px) {
-    nav {
-        font-size: 1.1em !important;
-        padding: 0.5em 0.7em !important;
-    }
-    nav strong {
-        font-size: 1em !important;
-    }
-}
-
 /* Banner responsive */
 .content-header {
     position: relative;
@@ -290,19 +216,6 @@ nav strong {
     filter: blur(10px) brightness(0.7);
     z-index: 0;
 }
-@media (max-width: 900px) {
-    .content-header {
-        min-height: 140px !important;
-        flex-direction: column !important;
-        gap: 0.7em !important;
-        padding: 1em 0.5em !important;
-    }
-    .content-header img[alt="Banner"] {
-        height: 100%;
-        min-height: 140px;
-        object-fit: cover;
-    }
-}
 
 /* SIDEBAR: abierto por defecto en PC, cerrado en móvil */
 #sidebar {
@@ -319,54 +232,6 @@ nav strong {
     height: calc(100vh - 70px);
     transform: translateX(0);
     overflow-y: auto;
-}
-#sidebar.sidebar-closed {
-    /* Solo oculto en móvil/tablet */
-}
-@media (max-width: 900px) {
-    #sidebar {
-        position: fixed;
-        left: 0;
-        top: 0;
-        height: 100vh;
-        width: 85vw;
-        max-width: 320px;
-        transform: translateX(-105%);
-        box-shadow: 2px 0 12px rgba(0,0,0,0.3);
-        padding: 1.2em 0.7em 1.2em 1em;
-    }
-    #sidebar.sidebar-open {
-        transform: translateX(0);
-        box-shadow: 2px 0 16px #0008;
-    }
-    #sidebar.sidebar-closed {
-        transform: translateX(-105%);
-        box-shadow: none;
-    }
-    #sidebar-close {
-        display: block !important;
-    }
-}
-@media (min-width: 901px) {
-    #sidebar {
-        position: relative;
-        left: 0;
-        top: 0;
-        height: 100vh;
-        width: 250px;
-        transform: translateX(0);
-        box-shadow: none;
-        padding: 2em 1em;
-    }
-    #sidebar.sidebar-closed {
-        transform: translateX(-100%);
-    }
-    #sidebar.sidebar-closed + .content {
-        margin-left: -250px;
-    }
-    #sidebar-close {
-        display: none !important;
-    }
 }
 
 #sidebar-close {
@@ -444,18 +309,6 @@ nav strong {
     transform-origin: center center;
 }
 
-@keyframes floatY {
-    0% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-4px);
-    }
-    100% {
-        transform: translateY(0);
-    }
-}
-
 /* Responsive Sidebar */
 #sidebar {
     transition: transform 0.35s cubic-bezier(.4,2,.6,1), box-shadow 0.3s;
@@ -466,53 +319,6 @@ nav strong {
 }
 #sidebar-close {
     display: none;
-}
-
-@media (max-width: 900px) {
-    #sidebar {
-        position: fixed;
-        left: 0;
-        top: 0;
-        height: 100vh;
-        width: 85vw;
-        max-width: 320px;
-        background: var(--bg-sidebar);
-        color: #fff;
-        transform: translateX(-105%);
-        box-shadow: none;
-        border-right: 2px solid #3a4250;
-        padding: 1.2em 0.7em 1.2em 1em;
-        transition: transform 0.35s cubic-bezier(.4,2,.6,1), box-shadow 0.3s;
-    }
-    #sidebar.sidebar-open {
-        transform: translateX(0);
-        box-shadow: 2px 0 16px rgba(0,0,0,0.5);
-    }
-    #sidebar-close {
-        display: block !important;
-    }
-    .container {
-        flex-direction: column;
-    }
-    #sidebar ul {
-        margin-top: 2em;
-    }
-    #sidebar li {
-        margin-bottom: 1em;
-    }
-}
-
-/* Sidebar cerrado (PC) */
-@media (min-width: 901px) {
-    #sidebar {
-        transform: translateX(0);
-        position: relative;
-        box-shadow: none;
-        padding: 2em 1em;
-    }
-    #sidebar-close {
-        display: none !important;
-    }
 }
 
 /* Botón hamburguesa siempre visible */
@@ -528,32 +334,6 @@ nav strong {
 /* Animación para el sidebar */
 #sidebar {
     will-change: transform;
-}
-
-/* Ajustes banner responsive */
-@media (max-width: 900px) {
-    .content-header {
-        min-height: 160px !important;
-        flex-direction: column !important;
-        gap: 0.7em !important;
-        padding: 1em 0.5em !important;
-    }
-    .content-header img[alt="AleEngine"] {
-        width: 48px !important;
-        height: 48px !important;
-    }
-    .content-header h1 {
-        font-size: 1.2em !important;
-    }
-    .content-header p {
-        font-size: 1em !important;
-    }
-}
-
-@media (max-width: 600px) {
-    #sidebar-toggle span {
-        font-size: 1.3em !important;
-    }
 }
 
 /* Prevenir selección de texto excepto en bloques de código */
@@ -707,6 +487,11 @@ body {
 }
 
 .toc-nav a {
+    position: relative;
+    padding-left: 1.5em;
+    text-align: left;
+    justify-content: flex-start;
+    width: 100%;
     color: #b3c0d1;
     text-decoration: none;
     font-size: 0.95em;
@@ -719,68 +504,45 @@ body {
     scroll-margin-top: 2rem; /* Añadir esta línea */
 }
 
-.toc-nav a:hover {
+/* Estilo para el elemento activo */
+.toc-nav a.active {
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    border-left: 3px solid #ffb8f6;
+}
+
+/* Hover solo para elementos no activos */
+.toc-nav a:not(.active):hover {
     background: rgba(255,255,255,0.1);
 }
 
-.toc-nav a::before {
+/* Mantener los estilos de niveles */
+.toc-nav a[data-level="2"].active {
+    background: rgba(255,255,255,0.1);
+    margin-left: 0.5em;
+}
+
+.toc-nav a[data-level="3"].active {
+    background: rgba(255,255,255,0.05);
+    margin-left: 1em;
+}
+
+/* Agregar flecha solo para level 1 */
+.toc-nav a[data-level="1"]::before {
     content: '►';
     font-size: 0.8em;
     transition: transform 0.2s;
+    margin-right: 0.5em;
 }
 
-.toc-nav a.active::before {
+.toc-nav a[data-level="1"].active::before {
     transform: rotate(90deg);
 }
 
-/* Responsive ajustado */
-@media (max-width: 1200px) {
-    .toc-container {
-        float: none;
-        width: 100%;
-        margin: 1em 0;
-    }
-}
-
-@media (max-width: 1200px) {
-    .content-wrapper {
-        flex-direction: column;
-        padding: 0 1em;
-    }
-
-    .toc-container {
-        width: 100%;
-        margin-top: 1em;
-        position: static;
-    }
-}
-
-/* Ajustar margen del contenido principal para dar espacio al TOC */
-.markdown-body {
-    margin-right: 280px;
-}
-
-/* Responsive */
-@media (max-width: 1200px) {
-    .toc-container {
-        display: none;
-    }
-    .markdown-body {
-        margin-right: 0;
-    }
-}
-
-/* Estilos para el highlight de encabezados */
-@keyframes headingHighlight {
-    0% {
-        background: transparent;
-    }
-    20% {
-        background: rgba(255, 255, 255, 0.1);
-    }
-    100% {
-        background: transparent;
-    }
+/* Ajustar padding para level 2 y 3 */
+.toc-nav a[data-level="2"],
+.toc-nav a[data-level="3"] {
+    padding-left: 2em;
 }
 
 .highlight-heading {
@@ -795,14 +557,38 @@ body {
     text-align: left;
     justify-content: flex-start;
     width: 100%;
+    color: #b3c0d1;
+    text-decoration: none;
+    font-size: 0.95em;
+    padding: 0.4em 0.8em;
+    border-radius: 4px;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
 }
 
-.toc-nav a[data-level="2"] {
-    padding-left: 2.5em;
+/* Estilo para el elemento activo */
+.toc-nav a.active {
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    border-left: 3px solid #ffb8f6;
 }
 
-.toc-nav a[data-level="3"] {
-    padding-left: 3.5em;
+/* Hover solo para elementos no activos */
+.toc-nav a:not(.active):hover {
+    background: rgba(255,255,255,0.1);
+}
+
+/* Mantener los estilos de niveles */
+.toc-nav a[data-level="2"].active {
+    background: rgba(255,255,255,0.1);
+    margin-left: 0.5em;
+}
+
+.toc-nav a[data-level="3"].active {
+    background: rgba(255,255,255,0.05);
+    margin-left: 1em;
 }
 
 /* Estilos para el scrollbar del TOC */
@@ -833,3 +619,30 @@ body {
     overflow-y: auto;
     border-right: 2px solid #3a4250;
 }
+
+/* Estilos para los encabezados activos en el contenido */
+.markdown-body h1.active,
+.markdown-body h2.active,
+.markdown-body h3.active {
+    background: rgba(255,255,255,0.1);
+    padding: 0.5em;
+    border-radius: 4px;
+    border-left: 3px solid #ffb8f6;
+    transition: background-color 0.3s ease;
+    margin-left: -0.5em;
+}
+
+/* Estilos específicos por nivel */
+.markdown-body h1.active {
+    background: rgba(255,255,255,0.15);
+}
+
+.markdown-body h2.active {
+    background: rgba(255,255,255,0.1);
+}
+
+.markdown-body h3.active {
+    background: rgba(255,255,255,0.05);
+}
+
+/* Actualizar el JavaScript para manejar la iluminación */
