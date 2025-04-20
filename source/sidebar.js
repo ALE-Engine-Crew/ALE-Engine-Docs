@@ -6,13 +6,16 @@ const mainContent = document.getElementById('main-content');
 // Estado inicial según pantalla
 function setSidebarInitialState() {
     const container = document.querySelector('.container');
-    if (window.innerWidth <= 900) {
-        sidebar.classList.remove('sidebar-open', 'sidebar-closed');
-        container.classList.remove('sidebar-closed');
-    } else {
-        sidebar.classList.remove('sidebar-open');
-        sidebar.classList.add('sidebar-closed');
-        container.classList.add('sidebar-closed');
+    // Solo ajustar el estado si el sidebar NO está abierto
+    if (!sidebar.classList.contains('sidebar-open')) {
+        if (window.innerWidth <= 900) {
+            sidebar.classList.remove('sidebar-closed');
+            container.classList.remove('sidebar-closed');
+        } else {
+            sidebar.classList.remove('sidebar-open');
+            sidebar.classList.add('sidebar-closed');
+            container.classList.add('sidebar-closed');
+        }
     }
 }
 

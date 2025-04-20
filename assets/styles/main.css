@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'rajdhani';
-    src: url('assets/fonts/rajdhani.ttf') format('truetype');
+    src: url('../fonts/rajdhani.ttf') format('truetype');
 }
 
 /* Variables root */
