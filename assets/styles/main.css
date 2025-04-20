@@ -154,14 +154,13 @@ nav strong {
     text-align: left;
 }
 
-/* Ajuste del content-wrapper */
+/* Ajustes para el content-wrapper */
 .content-wrapper {
     flex: 1;
     display: flex;
-    gap: 2em;
     padding: 0 2em;
     overflow: hidden;
-    width: 100%;
+    width: calc(100% - 220px); /* Restamos el ancho del sidebar */
     transition: all 0.35s cubic-bezier(.4,2,.6,1);
     margin-left: 220px;
     background: var(--bg-container); /* Asegurar que tiene fondo */
@@ -170,11 +169,13 @@ nav strong {
 /* Cuando el sidebar está cerrado */
 .container.sidebar-closed .content-wrapper {
     margin-left: 0;
+    width: 100%;
 }
 
 /* Ajustes para el contenedor principal */
 .content {
     flex: 1;
+    width: 100%; /* Asegura que use todo el ancho disponible */
     padding: 0 1.5em 2em 1.5em;
     overflow-y: auto;
     height: calc(100vh - 70px);
@@ -254,25 +255,32 @@ nav strong {
     font-family: 'rajdhani', Arial, sans-serif;
 }
 .markdown-body pre {
+    background: #2a364d;
     color: #fff;
     padding: 1em;
+    padding-right: 3em; /* Espacio para el botón de copiar */
     border-radius: 10px;
-    overflow-x: auto;
+    overflow: visible; /* Cambiado de auto a visible */
     border-left: 4px solid #3a4250;
     font-family: 'rajdhani', Arial, sans-serif;
     position: relative;
+    margin: 1em 0;
+    width: 100%;
+    box-sizing: border-box;
     -webkit-user-select: text;
     -moz-user-select: text;
     -ms-user-select: text;
     user-select: text;
-    background: #2a364d;
 }
 .markdown-body code {
-    background: #2d3441;
-    color: #a6b8c9;
-    padding: 2px 6px;
-    border-radius: 3px;
+    background: #2a364d;
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 4px;
     font-family: 'rajdhani', Arial, sans-serif;
+    border-left: 2px solid #3a4250;
+    display: inline-block;
+    margin: 0 2px;
 }
 .markdown-body ul {
     margin-left: 1.5em;
@@ -280,10 +288,10 @@ nav strong {
 .markdown-body {
     color: #fff;
     font-family: 'rajdhani', Arial, sans-serif;
-}
-.markdown-body {
-    max-width: 900px;
-    margin: 0 auto;
+    width: 100%; /* Usa todo el ancho disponible */
+    max-width: none; /* Elimina el max-width que limitaba el contenido */
+    margin: 0; /* Elimina los márgenes automáticos */
+    padding: 0 1em; /* Añade un poco de padding lateral */
 }
 .markdown-body a {
     color: #ffb8f6;
@@ -353,6 +361,18 @@ body {
     user-select: text;
 }
 
+/* Asegurarse que el código dentro de pre no herede los estilos de código inline */
+.markdown-body pre code {
+    background: transparent;
+    border-left: none;
+    padding: 0;
+    margin: 0;
+    display: block;
+    width: 100%;
+    overflow-x: auto; /* Permite scroll horizontal si es necesario */
+    white-space: pre-wrap; /* Mantiene el formato pero permite wrapping */
+}
+
 /* Estilo del botón copiar */
 .copy-button {
     position: absolute;
@@ -368,8 +388,9 @@ body {
     justify-content: center;
     color: #fff;
     cursor: pointer;
-    opacity: 0;
-    transition: all 0.2s ease;
+    opacity: 1; /* Cambiado de 0 a 1 para que siempre sea visible */
+    transition: background-color 0.2s ease;
+    z-index: 10; /* Asegura que el botón esté siempre visible */
 }
 
 .copy-button:hover {
@@ -380,15 +401,21 @@ body {
     background: #2d8a3e;
 }
 
+/* Eliminar la necesidad de hover para mostrar el botón */
 .markdown-body pre:hover .copy-button {
     opacity: 1;
 }
 
-/* Ajuste para asegurar que el icono esté centrado */
-.copy-button svg {
-    width: 16px;
-    height: 16px;
-    stroke: currentColor;
+/* Asegurarse que el código dentro de pre se muestre correctamente */
+.markdown-body pre code {
+    background: transparent;
+    border-left: none;
+    padding: 0;
+    margin: 0;
+    display: block;
+    width: 100%;
+    overflow-x: auto; /* Permite scroll horizontal si es necesario */
+    white-space: pre-wrap; /* Mantiene el formato pero permite wrapping */
 }
 
 /* Toast notifications */
@@ -454,6 +481,8 @@ body {
     overflow-y: auto; /* Scroll automático */
     scrollbar-width: thin;
     scrollbar-color: #6b7a8f #263043;
+    min-width: 240px; /* Ancho mínimo fijo */
+    margin-left: 2em; /* Espacio entre el contenido y el TOC */
 }
 
 .toc-header {

@@ -1,137 +1,136 @@
-# ALE Engine - API de Lua
-
-Bienvenido a la documentación de la API de Lua para ALE Engine. Aquí encontrarás una referencia completa y ejemplos prácticos para crear y modificar mods de manera eficiente y flexible.
-
----
+# Wiki de ALE Engine - API de Lua
 
 # General
 
-## `add(tag: String)`
-Agrega un objeto al Estado o Sub-Estado.<br>
-<sub>Solo funciona con objetos que sean subclase de FlxBasic.</sub>
+## add
 
-**Ejemplo:**  
-```lua
-add('theSprite')
-```
+Uso: `add(tag:String)`
 
----
+Sirve para Añadir Objetos al Estado / Sub-Estado <br/>
+<sub>Solo Sirve con Objetos que son Sub-Clase de FlxBasic</sub>
 
-## `remove(tag: String)`
-Elimina un objeto previamente añadido al Estado o Sub-Estado.<br>
-<sub>Solo funciona con objetos que ya han sido añadidos.</sub>
-
-**Ejemplo:**  
-```lua
-remove('theSprite')
-```
+Ejemplo: `add('theSprite')`
 
 ---
 
-## `insert(position: Int, tag: String)`
-Inserta un objeto en una posición específica dentro del Estado o Sub-Estado.
+## remove
 
-**Ejemplo:**  
-```lua
-insert(1, 'theSprite')
-```
+Uso: `remove(tag:String)`
 
----
+Sirve para Remover Objetos del Estado / Sub-Estado <br/>
+<sub>Solo Sirve con Objetos que ya Han Sido Añadidos, Obviamente</sub>
 
-## `debugPrint(text: Dynamic, ?color: FlxColor)`
-Muestra un texto en pantalla y en la consola.  
-Puedes asignar un color opcional.
-
-**Ejemplo:**  
-```lua
-debugPrint('ALE Engine Supremacy', colorFromName('RED'))
-```
-<sub>Utiliza funciones de [Color](#color)</sub>
+Ejemplo: `remove('theSprite')`
 
 ---
 
-## `setObjectCameras(tag: String, cameras: Array<String>)`
-Cambia las cámaras en las que se muestra un objeto.
+## insert
 
-**Ejemplo:**  
-```lua
-setObjectCameras('mySprite', {'camGame'})
-```
+Uso: `insert(position:Int, tag:String)`
 
----
+Similar a [add](#add), pero que Inserta el Objeto en una Posición Específica
 
-## `setVariable(name: String, value: Dynamic)`
-Asigna una variable al script.
-
-**Ejemplo:**  
-```lua
-setVariable('epicBool', true)
-```
+Ejemplo: `insert(1, 'theSprite')`
 
 ---
 
-## `setTag(tag: String, value: Dynamic)`
-Agrega o modifica una etiqueta en el script.
+## debugPrint
 
-**Ejemplo:**  
-```lua
-setTag('epicTag', true)
-```
+Uso: `debugPrint(text:Dynamic, ?color:FlxColor)`
 
----
+Sirve para Mostrar un Texto tanto en la Pantalla como en la Consola
 
-## `switchState(fullClassPath: String, params: Array<Dynamic>)`
-Cambia a otro estado.
+También cual se le Puede Asignar un Color <br/>
+<sub>(Opcional)</sub>
 
-**Ejemplo:**  
-```lua
-switchState('funkin.states.CustomState', ['CoolState'])
-```
+Ejemplo: `debugPrint('ALE Engine Supremacy', colorFromName('RED'))` </br>
+<sub>Se Hace Uso de las Funciones de [Color](#color)</sub>
 
 ---
 
-## `switchToCustomState(name: String)`
-Cambia a un estado personalizado.<br>
-<sub>Si el script no existe, se mostrará un error.</sub>
+## setObjectCameras
 
-**Ejemplo:**  
-```lua
-switchToCustomState('CoolState')
-```
+Uso: `setObjectCameras(tag:String, cameras:Array<String>)`
 
----
+Sirve para Cambiar las Cámaras en donde se Muestra un Objeto
 
-## `openSubState(fullClassPath: String, params: Array<Dynamic>)`
-Abre un sub-estado.
-
-**Ejemplo:**  
-```lua
-openSubState('funkin.substates.CustomSubState', ['CoolSubState'])
-```
-<sub>Solo disponible para estados.</sub>
+Ejemplo: `setObjectCameras('mySprite', {'camGame'})`
 
 ---
 
-## `openCustomSubState(name: String)`
-Abre un sub-estado personalizado.<br>
-<sub>Si el script no existe, se mostrará un error.</sub>
+## setVariable
 
-**Ejemplo:**  
-```lua
-openCustomSubState('CoolSubState')
-```
-<sub>Solo disponible para estados.</sub>
+Uso: `setVariable(name:String, value:Dynamic)`
+
+Sirve para Asignar una Variable al Script
+
+Ejemplo: `setVariable('epicBool', true)`
 
 ---
 
-## `close()`
-Cierra el sub-estado actual.<br>
-<sub>Solo disponible para sub-estados.</sub>
+## setTag
 
-**Ejemplo:**  
-```lua
-close()
-```
+Uso: `setTag(tag:String, value:Dynamic)`
+
+Sirve para Agregar / Alterar una Etiqueta al / del Script
+
+Ejemplo: `setTag('epicTag', true)`
+
+---
+
+## switchState
+
+Uso: `switchState(fullClassPath:String, params:Array<Dynamic>)`
+
+Sirve para Dirigirse a Otro Estado
+
+Ejemplo: `switchState('funkin.states.CustomState', ['CoolState'])`
+
+---
+
+## switchToCustomState
+
+Uso: `switchToCustomState(name:String)`
+
+Sirve para Dirigirse a un Estado Personalizado </br>
+<sub>Si el Script del Estado no Existe, se Mostrará un Error en la Pantalla</sub>
+
+Ejemplo: `switchToCustomState('CoolState')`
+
+---
+
+## openSubState
+
+Uso: `openSubState(fullClassPath:String, params:Array<Dynamic>)`
+
+Sirve para Abrir un Sub-Estado
+
+Ejemplo: `openSubState('funkin.substates.CustomSubState', ['CoolSubState'])`
+
+<sub>Solo está Disponible para Estados</sub>
+
+---
+
+## openCustomSubState
+
+Uso: `openCustomSubState(name:String)`
+
+Sirve para Abrir un Sub-Estado Personalizado </br>
+<sub>Si el Script del Sub-Estado no Existe, se Mostrará un Error en la Pantalla</sub>
+
+Ejemplo: `openCustomSubState('CoolSubState')`
+
+<sub>Solo está Disponible para Estados</sub>
+
+---
+
+## close
+
+Uso / Ejemplo: `close()`
+
+Sirve para Cerrar el Sub-Estado Actual
+
+<sub>Solo está Disponible para Sub-Estados</sub>
 
 ---
 
@@ -149,11 +148,11 @@ Ejemplo: `getProperty('playerIcon.scale.x')`
 
 ## setProperty
 
-Uso: `setProperty(variable:String, value:Dynamic, allowMaps:Bool = false)`
+Uso: `setProperty(variable:String, properties:Dynamic)`
 
 Sirve para Asignar una Propiedad de una Variable, ya sea Propia del Script o Propia del Estado / Sub-Estado en donde se está Ejecutando
 
-Ejemplo: `setProperty('playerIcon.y', 100)`
+Ejemplo: `setProperty('playerIcon', {scale = {x = 2, y = 2}, {x = 100, y = 100}})`
 
 ---
 
@@ -330,15 +329,65 @@ Ejemplo: `pathIsFolder('data')`
 
 ---
 
-# FlxSprite
+# FlxSprite API
 
 ## newSprite
-
-Uso: `newSprite(tag:String, ?x:Float, ?y:Float, ?sprite:String)`
+**Uso:**
+```lua
+newSprite(tag:String, ?x:Float, ?y:Float, ?sprite:String)
+```
 
 Crea una Instancia de FlxSprite
 
-Ejemplo: `newSprite('mySprite', 10, 10, 'menuBG')`
+**Ejemplo:**
+```lua
+newSprite('mySprite', 10, 10, 'menuBG')
+```
+
+---
+
+## loadGraphic
+**Uso:**
+```lua
+loadGraphic(tag:String, name:String, ?animated:Bool = false, ?frameWidth:Int = 0, frameHeight:Int = 0)
+```
+
+Sirve para Cargar una Imágen a un Sprite
+
+**Ejemplo:**
+```lua
+loadGraphic('mySprite', 'menuBGMagenta')
+```
+
+---
+
+## makeGraphic
+**Uso:**
+```lua
+makeGraphic(tag:String, width:Int, height:Int, ?color:FlxColor = FlxColor.WHITE)
+```
+
+Sirve para Crear un Gráfico y Asignárselo a un Sprite
+
+**Ejemplo:**
+```lua
+makeGraphic('mySprite', 100, 100, colorFromName('blue'))
+```
+
+---
+
+## playAnimation
+**Uso:**
+```lua
+playAnimation(tag:String, name:String, ?force:Bool, ?reversed:Bool, ?frame:Int)
+```
+
+Sirve para Reproducir una Animación que ya fue Añadida al Sprite
+
+**Ejemplo:**
+```lua
+playAnimation('mySprite', 'epicAnim', true, false)
+```
 
 ---
 
@@ -352,16 +401,6 @@ Ejemplo: `newGradient('myGradient', 1280, 720, {colorFromName('black'), colorFro
 
 ---
 
-## loadGraphic
-
-Uso: `loadGraphic(tag:String, name:String, ?animated:Bool = false, ?frameWidth:Int = 0, frameHeight:Int = 0)`
-
-Sirve para Cargar una Imágen a un Sprite
-
-Ejemplo: `loadGraphic('mySprite', 'menuBGMagenta')`
-
----
-
 ## getSparrowAtlas
 
 Uso: `getSparrowAtlas(tag:String, path:String)`
@@ -369,17 +408,6 @@ Uso: `getSparrowAtlas(tag:String, path:String)`
 Sirve para Cargar un Sprite Animado que Hace uso de XML
 
 Ejemplo: `getSparrowAtlas('mySprite', 'characters/BOYFRIEND')`
-
----
-
-## makeGraphic
-
-Uso: `makeGraphic(tag:String, width:Int, height:Int, ?color:FlxColor = FlxColor.WHITE)`
-
-Sirve para Crear un Gráfico y Asignárselo a un Sprite
-
-Ejemplo: `makeGraphic('mySprite', 100, 100, colorFromName('blue'))` </br>
-<sub>Se Hace Uso de las Funciones de [Color](#color)</sub>
 
 ---
 
@@ -403,14 +431,6 @@ Ejemplo: `addAnimationByIndices('mySprite', 'epicAnim', 'epicAnim', {0, 12, 20},
 
 ---
 
-## playAnimation
-
-Uso: `playAnimation(tag:String, name:String, ?force:Bool, ?reversed:Bool, ?frame:Int)`
-
-Sirve para Reproducir una Animación que ya fue Añadida al Sprite
-
-Ejemplo: `playAnimation('mySprite', 'epicAnim', true, false)`
-
 ## updateHitbox
 
 Uso: `updateHitbox(tag:String)`
@@ -421,62 +441,131 @@ Ejemplo: `updateHitbox('mySprite')`
 
 ---
 
-# FlxText
+# FlxText API
 
 ## newText
-
-Uso: `newText(tag:String, ?x:Float, ?y:Float, ?width:Float, ?text:String, ?size:Int)`
+**Uso:**
+```lua
+newText(tag:String, ?x:Float, ?y:Float, ?width:Float, ?text:String, ?size:Int)
+```
 
 Sirve para Crear una Instancia de FlxText
 
-Ejemplo: `newText('myText', 10, 100, 1280, 'ALE Engine Supremacy', 24)`
+**Ejemplo:**
+```lua
+newText('myText', 10, 100, 1280, 'ALE Engine Supremacy', 24)
+```
 
 ---
 
 ## applyTextMarkup
-
-Uso: `applyTextMarkup(tag:String, text:String, rules:Array<Array<Dynamic>>)`
+**Uso:**
+```lua
+applyTextMarkup(tag:String, text:String, rules:Array<Array<Dynamic>>)
+```
 
 Sirve para Asignarle Varios Colores a la Vez a un Texto
 
-Ejemplo: {% raw %}
-applyTextMarkup('myText', '*ALE* #Engine# %Supremacy%', {{'*', 0x00FFFF}, {'#', 0xFF0000}, {'%', 0x00FF00}})
-{% endraw %}
- </br>
-<sub>Se Hace Uso de las Funciones de [Color](#color)</sub>
+**Ejemplo:**
+```lua
+applyTextMarkup('myText', '*ALE* #Engine# %Supremacy%', {
+  {'*', colorFromName('cyan')},
+  {'#', colorFromName('red')},
+  {'%', colorFromName('green')}
+})
+```
 
 ---
 
 ## setTextFormat
-
-Uso: `setTextFormat(tag:String, ?font:String, ?size:Int, ?color:FlxColor, ?alignment:String, ?borderStyle:String, ?borderColor:FlxColor)`
+**Uso:**
+```lua
+setTextFormat(tag:String, ?font:String, ?size:Int, ?color:FlxColor, ?alignment:String, ?borderStyle:String, ?borderColor:FlxColor)
+```
 
 Sirve para Cambiar la Fuente, el Tamaño, el Color, la Alineación, el Estilo del borde y el Color del Borde a un Texto
 
-Ejemplo: `setTextFormat('myText', 'vcr.ttf', 24, colorFromName('white'), 'center', 'shadow', colorFromName('black'))` </br>
-<sub>Se Hace Uso de las Funciones de [Color](#color)</sub>
+**Ejemplo:**
+```lua
+setTextFormat('myText', 'vcr.ttf', 24, colorFromName('white'), 'center', 'shadow', colorFromName('black'))
+```
 
 ---
 
-# FlxSound
+# FlxSound API
 
 ## newSound
-
-Uso: `newSound(tag:String, sound:String)`
+**Uso:**
+```lua
+newSound(tag:String, sound:String)
+```
 
 Sirve para Crear una Instancia de FlxSound
 
-Ejemplo: `newSound('mySound', 'scrollMenu')`
+**Ejemplo:**
+```lua
+newSound('mySound', 'scrollMenu')
+```
 
 ---
 
 ## playSound
-
-Uso: `playSound(tag:String)`
+**Uso:**
+```lua
+playSound(tag:String)
+```
 
 Sirve para Reproducir un Sonido
 
-Ejemplo: `playSound('mySound')`
+**Ejemplo:**
+```lua
+playSound('mySound')
+```
+
+---
+
+## playMusic
+**Uso:**
+```lua
+playMusic(sound:String)
+```
+
+Sirve para Reproducir Música en el Juego
+
+**Ejemplo:**
+```lua
+playMusic('freakyMenu')
+```
+
+---
+
+## pauseSound
+**Uso:**
+```lua
+pauseSound(tag:String)
+```
+
+Sirve para Pausar un Sonido
+
+**Ejemplo:**
+```lua
+pauseSound('mySound')
+```
+
+---
+
+## resumeSound
+**Uso:**
+```lua
+resumeSound(tag:String)
+```
+
+Sirve para Despausar un Sonido
+
+**Ejemplo:**
+```lua
+resumeSound('mySound')
+```
 
 ---
 
@@ -544,6 +633,16 @@ Sirve para Despausar la Música del Juego
 
 ---
 
+## playSoundFile
+
+Uso: `playSoundFile`
+
+Sirve para Correr un Sonido
+
+Ejemplo: `playSoundFile('scrollMenu')`
+
+---
+
 # Color
 
 ## colorFromString
@@ -573,3 +672,92 @@ Uso: `colorFromName(name:String)`
 Sirve para Obtener un Color por medio de su Nombre
 
 Ejemplo: `colorFromName('red')`
+
+---
+
+# FlxTween
+
+## tween
+
+Uso: `tween(tag:String, vars:String, valueTypes:Dynamic, duration:Float, ?options:Dynamic)`
+
+Sirve para Crear y Correr un FlxTween
+
+Ejemplo: `tween('myTween', 'mySprite.scale', {x = 5, y = 5}, 1, {ease = 'circInOut', type = 'pingpong'})`
+
+---
+
+## cancelTween
+
+Uso: `cancelTween(tag:String)`
+
+Sirve para Cancelar un Tween
+
+Ejemplo: `cancelTween('myTween')`
+
+---
+
+# FlxTimer
+
+## newTimer
+
+Uso: `newTimer(tag:String)`
+
+Sirve para Crear un FlxTimer
+
+Ejemplo: `newTimer('myTimer')`
+
+---
+
+## startTimer
+
+Uso: `startTimer(tag:String, time:Float = 1, loops:Int)`
+
+Sirve para Correr un Timer ya Creado
+
+Ejemplo: `startTimer('myTimer', 1, 1)`
+
+---
+
+## cancelTimer
+**Uso:**
+```lua
+cancelTimer(tag:String)
+```
+
+Sirve para Cancelar un Timer que esté Corriendo
+
+**Ejemplo:**
+```lua
+cancelTimer('myTimer')
+```
+
+---
+
+## resetTimer
+**Uso:**
+```lua
+resetTimer(tag:String, ?newTime:Float = -1)
+```
+
+Sirve para Reiniciar un Timer y Reajustar su Duración de forma Opcional
+
+**Ejemplo:**
+```lua
+resetTimer('myTimer', 0.5)
+```
+
+---
+
+## runTimer
+**Uso:**
+```lua
+runTimer(tag:String, time:Float = 1, loops:Int = 1)
+```
+
+Sirve para Crear y Correr un Timer
+
+**Ejemplo:**
+```lua
+runTimer('fastTimer', 0.5, 1)
+```
