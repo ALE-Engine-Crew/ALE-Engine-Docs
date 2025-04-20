@@ -67,7 +67,7 @@ También cual se le Puede Asignar un Color <br/>
 Ejemplo: 
 `````````lua
 debugPrint('ALE Engine Supremacy', colorFromName('RED'))
-````````` </br>
+`````````
 <sub>Se Hace Uso de las Funciones de [Color](#color)</sub>
 
 ---
@@ -883,13 +883,14 @@ Sirve para Despausar la Música del Juego
 
 Uso: 
 `````````lua
-playSoundFile```
+playSoundFile(path:String, ?volume:Float = 1)
+`````````
 
 Sirve para Correr un Sonido
 
 Ejemplo: 
 `````````lua
-playSoundFile('scrollMenu')
+playSoundFile('scrollMenu', 1)
 `````````
 
 ---

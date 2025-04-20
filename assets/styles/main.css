@@ -958,3 +958,20 @@ body {
 .toc-nav a.active::before {
     background-color: #ffb8f6;
 }
+
+.suggestion-file-group {
+  margin-bottom: 1em;
+}
+.suggestion-file-title {
+  font-weight: bold;
+  margin-bottom: 0.3em;
+  display: flex;
+  align-items: center;
+}
+.suggestion-file-children {
+  margin-left: 1.5em;
+}
+.suggestion-branch {
+  color: #b3c0d1;
+  margin-right: 0.5em;
+}

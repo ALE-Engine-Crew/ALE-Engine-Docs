@@ -235,16 +235,22 @@ class DocumentSearch {
     findMatches(content, query) {
       const matches = []
       const lines = content.split("\n")
-  
+    
       lines.forEach((line, index) => {
-        if (line.toLowerCase().includes(query)) {
-          matches.push({
-            line: this.highlightMatch(line, query),
-            lineNumber: index + 1,
-          })
+        // Solo considerar líneas que son títulos (empiezan con #)
+        const headingMatch = line.match(/^(#+)\s*(.*)/)
+        if (headingMatch) {
+          const headingText = headingMatch[2].trim()
+          if (headingText.toLowerCase().includes(query)) {
+            matches.push({
+              // Solo resalta el texto del título, sin los #
+              line: this.highlightMatch(headingText, query),
+              lineNumber: index + 1,
+            })
+          }
         }
       })
-  
+    
       return matches
     }
   
@@ -255,62 +261,67 @@ class DocumentSearch {
   
     displaySuggestions(results) {
       this.suggestionsContainer.style.display = "block"
-  
+    
       if (!results.length) {
         this.suggestionsContainer.classList.add("error")
         this.suggestionsContainer.innerHTML = `
-                  <div class="error-result">
-                      <img src="assets/images/logos/Broke.png" alt="No results">
-                      <span class="error-message">Error: 404</span>
-                  </div>
-              `
+          <div class="error-result">
+            <img src="assets/images/logos/Broke.png" alt="No results">
+            <span class="error-message">Error: 404</span>
+          </div>
+        `
         return
       }
-  
+    
       this.suggestionsContainer.classList.remove("error")
-  
-      this.suggestionsContainer.innerHTML = results
-        .map((result) => {
-          // Crear un ID único para el título basado en su contenido
-          const titleId = result.line
-            .trim()
-            .toLowerCase()
-            .replace(/[^\w]+/g, "-")
-  
-          return `
-                      <div class="suggestion-item" 
-                          data-path="${result.path}"
-                          data-title-id="${titleId}">
-                          <span class="file-icon">📄</span>
-                          <div>
-                              <div>${result.file}</div>
-                              <small>${result.line}</small>
-                          </div>
-                      </div>
-                  `
-        })
-        .join("")
-  
-      this.suggestionsContainer.style.display = "block"
+    
+      // Agrupar resultados por archivo
+      const grouped = {}
+      results.forEach(result => {
+        if (!grouped[result.file]) grouped[result.file] = []
+        grouped[result.file].push(result)
+      })
+    
+      this.suggestionsContainer.innerHTML = Object.entries(grouped)
+        .map(([file, matches]) => `
+          <div class="suggestion-file-group">
+            <div class="suggestion-file-title">
+              <img src="assets/images/logos/FolLogo.png" alt="logo" style="width: 20px; vertical-align: middle; margin-right: 8px;">
+              <span>${file}</span>
+            </div>
+            <div class="suggestion-file-children">
+              ${matches.map(result => {
+                const titleId = result.line
+                  .trim()
+                  .toLowerCase()
+                  .replace(/[^\w]+/g, "-")
+                return `
+                  <div class="suggestion-item"
+                    data-path="${result.path}"
+                    data-title-id="${titleId}">
+                    <span class="suggestion-branch">└─</span>
+                    <small>${result.line}</small>
+                  </div>
+                `
+              }).join("")}
+            </div>
+          </div>
+        `).join("")
+    
       this.activeIndex = -1
-  
-      // Agregar event listeners a las sugerencias
+    
+      // Event listeners para los títulos encontrados
       this.suggestionsContainer.querySelectorAll(".suggestion-item").forEach((item, index) => {
         item.addEventListener("click", () => {
           loadMarkdown(item.dataset.path).then(() => {
             setTimeout(() => {
-              // Obtener el texto plano del resultado (sin HTML)
               const rawText = item.querySelector("small").innerText.replace(/\s+/g, " ").trim()
-  
-              // 1. Buscar heading por id generado (como hace updateTOC)
               let headingElement = null
               document.querySelectorAll(".markdown-body h1, .markdown-body h2, .markdown-body h3").forEach((h) => {
                 if (h.textContent.replace(/\s+/g, " ").trim() === rawText) {
                   headingElement = h
                 }
               })
-  
-              // 2. Si no es heading, buscar cualquier elemento que contenga el texto
               let targetElement = headingElement
               if (!targetElement) {
                 document.querySelectorAll(".markdown-body *").forEach((element) => {
@@ -319,16 +330,12 @@ class DocumentSearch {
                   }
                 })
               }
-  
               if (targetElement) {
                 const contentContainer = document.querySelector(".content")
-                // Calculate the exact position accounting for any offsets
                 const offsetTop =
                   targetElement.getBoundingClientRect().top +
                   contentContainer.scrollTop -
                   contentContainer.getBoundingClientRect().top
-  
-                // Perform the scroll with a slight offset for better visibility
                 contentContainer.scrollTo({
                   top: offsetTop - 20,
                   behavior: "smooth",
@@ -338,12 +345,12 @@ class DocumentSearch {
                   targetElement.classList.remove("highlight-heading")
                 }, 2000)
               }
-            }, 300) // Aumenta el delay si es necesario
+            }, 300)
           })
           this.deactivateSearch()
           this.searchInput.value = ""
         })
-  
+    
         item.addEventListener("mouseover", () => {
           this.activeIndex = index
           this.suggestionsContainer.querySelectorAll(".suggestion-item").forEach((s) => s.classList.remove("active"))
@@ -450,4 +457,3 @@ class DocumentSearch {
     new DocumentSearch()
     setupTOCNavigation()
   })
-  
