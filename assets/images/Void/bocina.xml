@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="bocina.png">
+	<!-- Created with Adobe Animate version 24.0.7.61 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="musicPlayer0000" x="20" y="20" width="262" height="398"/>
+	<SubTexture name="musicPlayer0001" x="20" y="20" width="262" height="398"/>
+	<SubTexture name="musicPlayer0002" x="302" y="20" width="262" height="398"/>
+	<SubTexture name="musicPlayer0003" x="302" y="20" width="262" height="398"/>
+	<SubTexture name="musicPlayer0004" x="584" y="20" width="262" height="398"/>
+	<SubTexture name="musicPlayer0005" x="584" y="20" width="262" height="398"/>
+	<SubTexture name="musicPlayer0006" x="20" y="438" width="262" height="398"/>
+	<SubTexture name="musicPlayer0007" x="20" y="438" width="262" height="398"/>
+	<SubTexture name="musicPlayer0008" x="302" y="438" width="262" height="398"/>
+	<SubTexture name="musicPlayer0009" x="302" y="438" width="262" height="398"/>
+</TextureAtlas>

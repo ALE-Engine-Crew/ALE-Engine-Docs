@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Void.png">
+	<!-- Created with Adobe Animate version 24.0.7.61 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="VoidDormida0000" x="20" y="20" width="466" height="549"/>
+	<SubTexture name="VoidDormida0001" x="506" y="20" width="466" height="549"/>
+	<SubTexture name="VoidDormida0002" x="992" y="20" width="466" height="549"/>
+	<SubTexture name="VoidDormida0003" x="1478" y="20" width="466" height="549"/>
+	<SubTexture name="VoidDormida0004" x="1964" y="20" width="466" height="549"/>
+	<SubTexture name="VoidDormida0005" x="2450" y="20" width="466" height="549"/>
+	<SubTexture name="VoidDormida0006" x="2936" y="20" width="466" height="549"/>
+	<SubTexture name="VoidDormida0007" x="3422" y="20" width="466" height="549"/>
+	<SubTexture name="VoidDormida0008" x="20" y="589" width="466" height="549"/>
+	<SubTexture name="VoidDormida0009" x="20" y="589" width="466" height="549"/>
+	<SubTexture name="VoidDormida0010" x="506" y="589" width="466" height="549"/>
+	<SubTexture name="VoidDormida0011" x="506" y="589" width="466" height="549"/>
+	<SubTexture name="VoidDormida0012" x="992" y="589" width="466" height="549"/>
+	<SubTexture name="VoidDormida0013" x="1478" y="589" width="466" height="549"/>
+	<SubTexture name="VoidDormida0014" x="1964" y="589" width="466" height="549"/>
+	<SubTexture name="VoidDormida0015" x="2450" y="589" width="466" height="549"/>
+	<SubTexture name="VoidDormida0016" x="2936" y="589" width="466" height="549"/>
+	<SubTexture name="VoidDormida0017" x="3422" y="589" width="466" height="549"/>
+	<SubTexture name="VoidDormida0018" x="20" y="1158" width="466" height="549"/>
+	<SubTexture name="VoidDormida0019" x="506" y="1158" width="466" height="549"/>
+	<SubTexture name="VoidDormida0020" x="992" y="1158" width="466" height="549"/>
+	<SubTexture name="VoidDormida0021" x="992" y="1158" width="466" height="549"/>
+	<SubTexture name="VoidDormida0022" x="1478" y="1158" width="466" height="549"/>
+	<SubTexture name="VoidDormida0023" x="1478" y="1158" width="466" height="549"/>
+	
+	<!-- Combinando danceLeft y danceRight en idleDance -->
+	<SubTexture name="idleDance0000" x="1964" y="1158" width="380" height="540"/>
+	<SubTexture name="idleDance0001" x="1964" y="1158" width="380" height="540"/>
+	<SubTexture name="idleDance0002" x="2364" y="1158" width="380" height="540"/>
+	<SubTexture name="idleDance0003" x="2364" y="1158" width="380" height="540"/>
+	<SubTexture name="idleDance0004" x="2764" y="1158" width="380" height="540"/>
+	<SubTexture name="idleDance0005" x="2764" y="1158" width="380" height="540"/>
+	<SubTexture name="idleDance0006" x="3164" y="1158" width="380" height="540"/>
+	<SubTexture name="idleDance0007" x="3164" y="1158" width="380" height="540"/>
+	<SubTexture name="idleDance0008" x="3564" y="1158" width="380" height="540"/>
+	<SubTexture name="idleDance0009" x="3564" y="1158" width="380" height="540"/>
+	<SubTexture name="idleDance0010" x="20" y="1727" width="397" height="554"/>
+	<SubTexture name="idleDance0011" x="20" y="1727" width="397" height="554"/>
+	<SubTexture name="idleDance0012" x="437" y="1727" width="397" height="554"/>
+	<SubTexture name="idleDance0013" x="437" y="1727" width="397" height="554"/>
+	<SubTexture name="idleDance0014" x="854" y="1727" width="397" height="554"/>
+	<SubTexture name="idleDance0015" x="854" y="1727" width="397" height="554"/>
+	<SubTexture name="idleDance0016" x="1271" y="1727" width="397" height="554"/>
+	<SubTexture name="idleDance0017" x="1271" y="1727" width="397" height="554"/>
+	<SubTexture name="idleDance0018" x="1688" y="1727" width="397" height="554"/>
+	<SubTexture name="idleDance0019" x="1688" y="1727" width="397" height="554"/>
+	
+	<!-- Play animation frames -->
+	<SubTexture name="play0000" x="2105" y="1727" width="378" height="542"/> <!-- Play a la musica -->
+	<SubTexture name="play0001" x="2105" y="1727" width="378" height="542"/>
+	<SubTexture name="play0002" x="2503" y="1727" width="378" height="542"/>
+	<SubTexture name="play0003" x="2503" y="1727" width="378" height="542"/>
+	<SubTexture name="play0004" x="2901" y="1727" width="378" height="542"/>
+	<SubTexture name="play0005" x="2901" y="1727" width="378" height="542"/>
+	<SubTexture name="play0006" x="3299" y="1727" width="378" height="542"/>
+	<SubTexture name="play0007" x="3299" y="1727" width="378" height="542"/>
+	<SubTexture name="play0008" x="3697" y="1727" width="378" height="542"/>
+	<SubTexture name="play0009" x="3697" y="1727" width="378" height="542"/>
+	<SubTexture name="play0010" x="3697" y="1727" width="378" height="542"/>
+	<SubTexture name="play0011" x="3697" y="1727" width="378" height="542"/>
+	<SubTexture name="play0012" x="3697" y="1727" width="378" height="542"/>
+	<SubTexture name="play0013" x="3697" y="1727" width="378" height="542"/>
+	<SubTexture name="play0014" x="3697" y="1727" width="378" height="542"/>
+	<SubTexture name="play0015" x="3697" y="1727" width="378" height="542"/>
+	<SubTexture name="play0016" x="3697" y="1727" width="378" height="542"/>
+	<SubTexture name="play0017" x="20" y="2301" width="378" height="542"/>
+	<SubTexture name="play0018" x="20" y="2301" width="378" height="542"/>
+	<SubTexture name="play0019" x="3697" y="1727" width="378" height="542"/>
+	<SubTexture name="play0020" x="3697" y="1727" width="378" height="542"/>
+	<SubTexture name="play0021" x="3697" y="1727" width="378" height="542"/>
+	<SubTexture name="play0022" x="20" y="2301" width="378" height="542"/>
+	<SubTexture name="play0023" x="20" y="2301" width="378" height="542"/>
+	<SubTexture name="play0024" x="3697" y="1727" width="378" height="542"/>
+	<SubTexture name="play0025" x="3697" y="1727" width="378" height="542"/>
+	<SubTexture name="play0026" x="3697" y="1727" width="378" height="542"/>
+	<SubTexture name="play0027" x="3697" y="1727" width="378" height="542"/>
+	<SubTexture name="play0028" x="3697" y="1727" width="378" height="542"/>
+	<SubTexture name="play0029" x="3697" y="1727" width="378" height="542"/>
+	<SubTexture name="play0030" x="3697" y="1727" width="378" height="542"/>
+	<SubTexture name="play0031" x="3697" y="1727" width="378" height="542"/>
+	<SubTexture name="play0032" x="3697" y="1727" width="378" height="542"/>
+	<SubTexture name="play0033" x="418" y="2301" width="378" height="542"/>
+</TextureAtlas>

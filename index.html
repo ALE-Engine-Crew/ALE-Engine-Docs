@@ -1,41 +1,70 @@
-<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html> <!-- Indica que el documento es HTML5 -->
+<html lang="es"> <!-- Comienza el documento HTML, idioma español -->
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documentación - ALE Engine</title>
-    <link rel="shortcut icon" href="assets/images/logos/FolLogo.png" type="image/x-icon">
+    <meta charset="UTF-8"> <!-- Codificación de caracteres UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsive design para móviles -->
+    <title>Documentación - ALE Engine</title> <!-- Título de la pestaña del navegador -->
+    <link rel="shortcut icon" href="assets/images/logos/FolLogo.png" type="image/x-icon"> <!-- Icono de la pestaña -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script> <!-- Librería para parsear Markdown -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.87.0/phaser.min.js"></script> <!-- Librería Phaser para animaciones y gráficos -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script> <!-- Librería GSAP para animaciones -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
 </head>
 <body>
+
+
+
+    <!-- Barra de navegación superior -->
     <nav>
+        <!-- Botón para abrir el menú lateral (sidebar) en móviles -->
         <button id="sidebar-toggle" aria-label="Abrir menú" style="background:none;border:none;cursor:pointer;margin-right:1em;">
-            <span style="font-size:2em; color:#b3c0d1;">&#9776;</span>
+            <span style="font-size:2em; color:#b3c0d1;">&#9776;</span> <!-- Icono de menú hamburguesa -->
         </button>
+        <!-- Logo flotante a la izquierda del nav -->
         <img class="logo-float" src="assets/images/logos/FolLogo.png" alt="AleEngine" style="margin-right: 1em;">
-        <strong>ALE Engine - Documentación</strong>
+        <strong>ALE Engine - Documentación</strong> <!-- Título visible en la barra de navegación -->
     </nav>
+
+    <!-- Contenedor principal de la página -->
     <div class="container">
+
+        <!-- Menú lateral (sidebar) -->
         <aside class="sidebar" id="sidebar">
+            <!-- Botón para cerrar el menú lateral (solo visible en móviles) -->
             <button id="sidebar-close" aria-label="Cerrar menú" style="background:none;border:none;cursor:pointer;display:none;position:absolute;top:1em;right:1em;font-size:2em;color:#fff;z-index:10;">&times;</button>
-            <!-- Agregar el buscador -->
+            <!-- Buscador dentro del sidebar -->
             <div class="sidebar-search">
                 <div class="search-input-wrapper">
-                    <input type="text" id="sidebar-search" placeholder="Buscar en la documentación...">
+                    <input type="text" id="sidebar-search" placeholder="Buscar en la documentación..."> <!-- Campo de búsqueda -->
                     <button class="search-icon">
+                        <!-- Icono de lupa SVG -->
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <circle cx="11" cy="11" r="8"></circle>
                             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                         </svg>
                     </button>
                 </div>
-                <div id="search-suggestions" class="search-suggestions"></div>
+                <div id="search-suggestions" class="search-suggestions"></div> <!-- Sugerencias de búsqueda -->
             </div>
+            <!-- Lista de enlaces del sidebar -->
             <ul>
-                <li><a href="#" onclick="loadMarkdown('md/LuaApi.md'); return false;">Lua API</a></li>
+                <li>
+                    <!-- Enlace para cargar la documentación de la API de Lua -->
+                    <a href="#" onclick="loadMarkdown('md/LuaApi.md'); return false;">Lua API</a>
+                </li>
             </ul>
+
+            <div id="void-animation-container" style="width: 100%; height: 300px;">
+                <div id="void-container" style="width: 100%; height: 100%;"></div>
+            </div>
         </aside>
+
+
+
+        <!-- Contenido principal a la derecha del sidebar -->
         <div class="content-wrapper">
             <main class="content" id="main-content">
+                <!-- Encabezado visual con banner y logo -->
                 <header class="content-header" 
                     style="
                         position: relative;
@@ -48,7 +77,7 @@
                         border-radius: 12px;
                         overflow: hidden;
                     ">
-                    <!-- Fondo con blur -->
+                    <!-- Imagen de fondo con blur -->
                     <img src="assets/images/banner.png" alt="Banner" 
                         style="
                             position: absolute;
@@ -60,9 +89,11 @@
                             filter: blur(10px) brightness(0.7);
                             z-index: 0;
                         ">
-                    <!-- Contenido centrado -->
+                    <!-- Contenido centrado sobre el banner -->
                     <div style="position: relative; z-index: 1; display: flex; align-items: center; gap: 1.5em; flex-wrap: wrap;">
+                        <!-- Logo principal -->
                         <img src="assets/images/logos/Logo.png" alt="AleEngine" style="width: 64px; height: 64px; border-radius: 12px; box-shadow: 0 2px 8px #0004;">
+                        <!-- Título y subtítulo -->
                         <div style="text-align: center; background-color: rgba(0, 0, 0, 0.185); border-radius: 27px; padding: 10px;">
                             <h1 id="section-title" style="margin: 0; font-size: 2.2em; color: #fff; text-shadow: 0 2px 8px #0008;">Bienvenido a la Documentación de ALE Engine</h1>
                             <p style="margin: 0; margin-top: 0.7em; color: #e0e0e0; text-shadow: 0 1px 4px #0008; font-size: 1.15em; font-weight: 500;">
@@ -71,7 +102,9 @@
                         </div>
                     </div>
                 </header>
+                <!-- Sección principal de contenido en markdown -->
                 <section id="markdown-content" class="markdown-body" style="padding: 2em; min-height: 200px;">
+                    <!-- Presentación del motor -->
                     <div style="display: flex; align-items: start; gap: 1.5em; margin-bottom: 3em;">
                         <img src="assets/images/logos/Logo.png" alt="AleEngine" style="width: 64px; height: 64px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
                         <div>
@@ -81,7 +114,7 @@
                             </p>
                         </div>
                     </div>
-
+                    <!-- Características principales -->
                     <div style="margin-bottom: 3em;">
                         <h3 style="color: #fff; font-size: 1.4em; margin-bottom: 1em;">Características Fundamentales</h3>
                         <div style="color: #e0e0e0; line-height: 1.8;">
@@ -89,19 +122,17 @@
                                 <strong style="color: #fff; display: block; margin-bottom: 0.5em;">Rendimiento Optimizado</strong>
                                 Hemos reescrito todo el engine arreglando componentes críticos del motor para asegurar una experiencia fluida tanto en PC como en dispositivos Android, manteniendo la fidelidad visual que los jugadores esperan.
                             </p>
-                            
                             <p style="margin-bottom: 1.5em;">
                                 <strong style="color: #fff; display: block; margin-bottom: 0.5em;">Sistema de Scripting Avanzado</strong>
                                 Integración completa con Lua y HScript, permitiendo modificaciones profundas del gameplay sin necesidad de recompilar. Desde simples cambios visuales hasta mecánicas completamente nuevas, las posibilidades son infinitas, tu unico limite es tu mente.
                             </p>
-                            
                             <p style="margin-bottom: 1.5em;">
                                 <strong style="color: #fff; display: block; margin-bottom: 0.5em;">Diseño Multiplataforma</strong>
                                 Desarrollado desde cero pensando en la compatibilidad móvil, con controles adaptables y una interfaz que responde a diferentes tamaños de pantalla y métodos de entrada.
                             </p>
                         </div>
                     </div>
-
+                    <!-- Sección para desarrolladores -->
                     <div style="margin-bottom: 3em;">
                         <h3 style="color: #fff; font-size: 1.4em; margin-bottom: 1em;">Para Desarrolladores</h3>
                         <p style="color: #e0e0e0; line-height: 1.8; margin-bottom: 1.5em;">
@@ -114,7 +145,7 @@
                             <li style="margin-bottom: 0.8em;">Flujo de trabajo optimizado para pruebas rápidas de cambios</li>
                         </ul>
                     </div>
-
+                    <!-- Pie de página de la sección principal -->
                     <div style="margin-top: 4em; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2em;">
                         <p style="color: #e0e0e0; text-align: center; font-size: 1.1em;">
                             Explora la documentación para descubrir todo lo que puedes crear con ALE Engine. <br>
@@ -122,6 +153,7 @@
                         </p>
                     </div>
                 </section>
+                <!-- Indicador de carga de documentación -->
                 <div id="loading-indicator" style="display:none; text-align:center; margin-top:2em;">
                     <span style="font-size:1.1em;">Cargando documentación...</span>
                 </div>
@@ -132,19 +164,21 @@
             </aside>
         </div>
     </div>
+    <!-- Scripts JS necesarios para la funcionalidad de la página -->
     <div class="scripts">
-        <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-        <script src="source/sidebar.js"></script>
-        <script src="source/copyButton.js"></script>
-        <script src="source/loadMd.js"></script>
-        <script src="source/toast.js"></script>
-        <script src="source/TOC.js"></script>
-        <script src="source/search.js"></script>
+        <script src="source/sidebar.js"></script> <!-- Lógica del sidebar -->
+        <script src="source/copyButton.js"></script> <!-- Botón para copiar código -->
+        <script src="source/loadMd.js"></script> <!-- Carga de archivos Markdown -->
+        <script src="source/toast.js"></script> <!-- Notificaciones tipo toast -->
+        <script src="source/TOC.js"></script> <!-- Tabla de contenidos automática -->
+        <script src="source/search.js"></script> <!-- Buscador de la documentación -->
+        <script src="source/voidPhaser.js"></script> <!-- Script para animaciones de Void -->
     </div>
+    <!-- Hojas de estilo CSS -->
     <div class="styles">
-        <link rel="stylesheet" href="assets/styles/main.css">
-        <link rel="stylesheet" href="assets/styles/android.css">
-        <link rel="stylesheet" href="assets/styles/anims.css">
+        <link rel="stylesheet" href="assets/styles/main.css"> <!-- Estilos principales -->
+        <link rel="stylesheet" href="assets/styles/android.css"> <!-- Estilos específicos para Android -->
+        <link rel="stylesheet" href="assets/styles/anims.css"> <!-- Animaciones -->
     </div>
 </body>
 </html>
