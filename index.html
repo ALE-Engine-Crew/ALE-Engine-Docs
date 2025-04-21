@@ -12,8 +12,6 @@
 </head>
 <body>
 
-
-
     <!-- Barra de navegación superior -->
     <nav>
         <!-- Botón para abrir el menú lateral (sidebar) en móviles -->
@@ -29,7 +27,7 @@
     <div class="container">
 
         <!-- Menú lateral (sidebar) -->
-        <aside class="sidebar" id="sidebar">
+        <aside class="sidebar" id="sidebar" style="overflow-x: hidden;">
             <!-- Botón para cerrar el menú lateral (solo visible en móviles) -->
             <button id="sidebar-close" aria-label="Cerrar menú" style="background:none;border:none;cursor:pointer;display:none;position:absolute;top:1em;right:1em;font-size:2em;color:#fff;z-index:10;">&times;</button>
             <!-- Buscador dentro del sidebar -->
@@ -52,13 +50,13 @@
                     <!-- Enlace para cargar la documentación de la API de Lua -->
                     <a href="#" onclick="loadMarkdown('md/LuaApi.md'); return false;">Lua API</a>
                 </li>
-            </ul>
-
-            <div id="void-animation-container" style="width: 100%; height: 300px;">
-                <div id="void-container" style="width: 100%; height: 100%;"></div>
+            </ul> 
+            <!-- Animación flotante fuera del sidebar -->
+            <div id="void-animation-container" style="position: fixed; bottom: 30px; left: 30px; cursor: pointer; z-index: 999;">
+                <div id="void-container" style="width: 200px; height: 200px; position: absolute; pointer-events: auto;"></div>
+                <div id="speaker-container" style="width: 100px; height: 130px; position: absolute; top: 110px; left: -10px;"></div>
             </div>
         </aside>
-
 
 
         <!-- Contenido principal a la derecha del sidebar -->
