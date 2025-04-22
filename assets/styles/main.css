@@ -2,6 +2,9 @@
 @font-face {
     font-family: 'rajdhani';
     src: url('../fonts/rajdhani.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
 }
 
 /* Root variables */
@@ -13,7 +16,11 @@
     --ale-accent: #00FFFF;
     --ale-dark: #1A1A2E;
     --ale-light: #F8F8FF;
-    --ale-gradient: linear-gradient(135deg, var(--ale-primary), var(--ale-secondary));
+    --ale-gradient: linear-gradient(135deg, var(--ale-accent), var(--ale-dark));
+}
+
+* {
+    box-sizing: border-box;
 }
 
 /* Base styles for html and body */
@@ -125,6 +132,31 @@ nav strong span {
     z-index: 1002;
     border: 1px solid var(--ale-primary);
 }
+
+.error-result {
+    z-index: 3000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    color: #fff;
+    gap: 1rem;
+    max-width: max-content;
+    backdrop-filter: blur(10px);
+  }
+  
+  .error-result img {
+    width: 40px;
+    height: auto;
+  }
+  
+  .error-message {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #ff4d4d;
+  }
+  
 
 #sidebar-search {
     width: 100%;
@@ -254,13 +286,26 @@ nav strong span {
 .content-wrapper {
     flex: 1;
     display: flex;
-    padding: 0 2em;
+    padding: 0 0;
     overflow: hidden;
     width: calc(100% - 220px);
     transition: all 0.35s cubic-bezier(.4,2,.6,1);
     margin-left: 220px;
     background: var(--bg-container);
 }
+
+.content-wrapper.search-active{
+    filter: blur(5px);
+    pointer-events: none; /* Evita que hagan clic mientras está el blur */
+  }
+  
+  .content-wrapper.search-active .search-bar {
+    filter: none;
+    pointer-events: auto;
+    position: relative;
+    z-index: 1;
+  }
+  
 
 .container.sidebar-closed .content-wrapper {
     margin-left: 0;
@@ -316,12 +361,13 @@ nav strong span {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100vw;
-    min-width: 100%;
+    width: 100%; /* Ajusta al contenedor */
     height: 100%;
     object-fit: cover;
     opacity: 0.3;
     z-index: 0;
+    filter: blur(10px); /* Esto le mete el blur */
+    pointer-events: none; /* opcional: para que no estorbe */
 }
 
 /* Header content */
@@ -340,14 +386,11 @@ nav strong span {
     display: flex;
     align-items: center;
     gap: 1.5em;
-    margin-bottom: 1.5em;
 }
 
 .header-logo img {
     width: 80px;
     height: 80px;
-    border: 2px solid var(--ale-accent);
-    box-shadow: 0 0 20px var(--ale-primary);
     animation: alePulse 3s ease-in-out infinite;
 }
 
@@ -355,10 +398,6 @@ nav strong span {
     margin: 0;
     font-size: 2.5em;
     color: var(--ale-light);
-    text-shadow: 0 0 10px var(--ale-accent);
-    background: linear-gradient(90deg, var(--ale-primary), var(--ale-accent));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
 }
 
 /* Markdown content */
@@ -374,6 +413,7 @@ nav strong span {
     width: 100%;
     max-width: none;
     margin: 0;
+    margin-right: 0px;
     overflow: visible;
     max-height: none;
 }
@@ -415,6 +455,7 @@ nav strong span {
     padding-right: 3em;
     border-radius: 10px;
     overflow: visible;
+    overflow-x: auto;
     border-left: 4px solid #3a4250;
     font-family: 'rajdhani', Arial, sans-serif;
     position: relative;
@@ -561,7 +602,6 @@ nav strong span {
 }
 
 .toc-header {
-    background: linear-gradient(90deg, var(--ale-dark), var(--ale-primary));
     color: white;
     font-size: 1.1em;
     font-weight: 500;
@@ -870,7 +910,6 @@ nav strong span {
     width: 32px;
     height: 32px;
     position: relative;
-    animation: aleFloat 4s ease-in-out infinite;
     transform-origin: center center;
     margin-right: 1em;
 }
@@ -886,12 +925,11 @@ nav strong span {
 .welcome-icon {
     min-width: 64px;
     height: 64px;
-    background: var(--ale-gradient);
+    background: transparent;
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 15px var(--ale-primary);
 }
 
 .welcome-icon span {

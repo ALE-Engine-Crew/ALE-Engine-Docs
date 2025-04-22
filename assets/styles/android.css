@@ -229,11 +229,6 @@
     }
 }
 
-/* Ajustar margen del contenido principal para dar espacio al TOC */
-.markdown-body {
-    margin-right: 280px;
-}
-
 /* Responsive */
 @media (max-width: 1200px) {
     .toc-container {
