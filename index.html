@@ -1,182 +1,521 @@
-<!DOCTYPE html> <!-- Indica que el documento es HTML5 -->
-<html lang="es"> <!-- Comienza el documento HTML, idioma español -->
+<!DOCTYPE html>
+<html lang="es">
 <head>
-    <meta charset="UTF-8"> <!-- Codificación de caracteres UTF-8 -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsive design para móviles -->
-    <title>Documentación - ALE Engine</title> <!-- Título de la pestaña del navegador -->
-    <link rel="shortcut icon" href="assets/images/logos/FolLogo.png" type="image/x-icon"> <!-- Icono de la pestaña -->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script> <!-- Librería para parsear Markdown -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.87.0/phaser.min.js"></script> <!-- Librería Phaser para animaciones y gráficos -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script> <!-- Librería GSAP para animaciones -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALE Engine - Documentación Oficial</title>
+    <link rel="shortcut icon" href="assets/images/logos/FolLogo.png" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        :root {
+            --ale-primary: #FF6EC7;
+            --ale-secondary: #8A2BE2;
+            --ale-accent: #00FFFF;
+            --ale-dark: #1A1A2E;
+            --ale-light: #F8F8FF;
+        }
+        
+        /* Animaciones personalizadas */
+        @keyframes alePulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes aleFloat {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .ale-highlight {
+            background: linear-gradient(90deg, transparent 0%, rgba(var(--ale-primary), 0.1) 50%, transparent 100%);
+            padding: 0.2em 0.5em;
+            border-radius: 4px;
+        }
+    </style>
 </head>
 <body>
-
-    <!-- Barra de navegación superior -->
-    <nav>
-        <!-- Botón para abrir el menú lateral (sidebar) en móviles -->
+    <!-- Barra de navegación con estilo ALE -->
+    <nav style="background: linear-gradient(135deg, var(--ale-dark) 0%, #16213E 100%); border-bottom: 1px solid var(--ale-primary);">
         <button id="sidebar-toggle" aria-label="Abrir menú" style="background:none;border:none;cursor:pointer;margin-right:1em;">
-            <span style="font-size:2em; color:#b3c0d1;">&#9776;</span> <!-- Icono de menú hamburguesa -->
+            <span style="font-size:2em; color:var(--ale-accent);">&#9776;</span>
         </button>
-        <!-- Logo flotante a la izquierda del nav -->
-        <img class="logo-float" src="assets/images/logos/FolLogo.png" alt="AleEngine" style="margin-right: 1em;">
-        <strong>ALE Engine - Documentación</strong> <!-- Título visible en la barra de navegación -->
+        <img class="logo-float" src="assets/images/logos/FolLogo.png" alt="AleEngine" style="margin-right: 1em; animation: aleFloat 4s ease-in-out infinite;">
+        <strong style="color: var(--ale-light); font-size: 1.2em; text-shadow: 0 0 10px var(--ale-accent);">ALE Engine <span style="color: var(--ale-primary);">Documentación</span></strong>
     </nav>
 
-    <!-- Contenedor principal de la página -->
     <div class="container">
-
-        <!-- Menú lateral (sidebar) -->
-        <aside class="sidebar" id="sidebar" style="overflow-x: hidden;">
-            <!-- Botón para cerrar el menú lateral (solo visible en móviles) -->
-            <button id="sidebar-close" aria-label="Cerrar menú" style="background:none;border:none;cursor:pointer;display:none;position:absolute;top:1em;right:1em;font-size:2em;color:#fff;z-index:10;">&times;</button>
-            <!-- Buscador dentro del sidebar -->
+        <!-- Sidebar con estilo personalizado -->
+        <aside class="sidebar" id="sidebar" style="background: linear-gradient(180deg, var(--ale-dark) 0%, #16213E 100%); border-right: 1px solid var(--ale-primary); overflow-x: hidden;">
+            <button id="sidebar-close" aria-label="Cerrar menú" style="background:none;border:none;cursor:pointer;display:none;position:absolute;top:1em;right:1em;font-size:2em;color:var(--ale-accent);z-index:10;">&times;</button>
+            
             <div class="sidebar-search">
-                <div class="search-input-wrapper">
-                    <input type="text" id="sidebar-search" placeholder="Buscar en la documentación..."> <!-- Campo de búsqueda -->
-                    <button class="search-icon">
-                        <!-- Icono de lupa SVG -->
+                <div class="search-input-wrapper" style="border: 1px solid var(--ale-primary);">
+                    <input type="text" id="sidebar-search" placeholder="Buscar..." style="color: var(--ale-light);">
+                    <button class="search-icon" style="color: var(--ale-accent);">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <circle cx="11" cy="11" r="8"></circle>
                             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                         </svg>
                     </button>
                 </div>
-                <div id="search-suggestions" class="search-suggestions"></div> <!-- Sugerencias de búsqueda -->
+                <div id="search-suggestions" class="search-suggestions" style="background: var(--ale-dark); border: 1px solid var(--ale-primary);"></div>
             </div>
-            <!-- Lista de enlaces del sidebar -->
-            <ul>
-                <li>
-                    <!-- Enlace para cargar la documentación de la API de Lua -->
-                    <a href="#" onclick="loadMarkdown('md/LuaApi.md'); return false;">Lua API</a>
+            
+            <ul style="border-top: 1px solid var(--ale-primary);">
+                <li style="border-bottom: 1px solid rgba(138, 43, 226, 0.2);">
+                    <a href="#" onclick="loadMarkdown('md/LuaApi.md'); return false;" style="color: var(--ale-light); transition: all 0.3s ease;" 
+                       onmouseover="this.style.color='var(--ale-accent)'; this.style.paddingLeft='10px';" 
+                       onmouseout="this.style.color='var(--ale-light)'; this.style.paddingLeft='0';">
+                        Lua API
+                    </a>
                 </li>
             </ul> 
-            <!-- Animación flotante fuera del sidebar -->
-            <div id="void-animation-container" style="position: fixed; bottom: 30px; left: 30px; cursor: pointer; z-index: 999;">
+            
+            <!-- Contenedor de Void con estilo mejorado -->
+            <div id="void-animation-container" style="position: fixed; bottom: 30px; left: 30px; cursor: pointer; z-index: 999; filter: drop-shadow(0 0 10px var(--ale-primary));">
                 <div id="void-container" style="width: 200px; height: 200px; position: absolute; pointer-events: auto;"></div>
-                <div id="speaker-container" style="width: 100px; height: 130px; position: absolute; top: 110px; left: -10px;"></div>
+                <div id="speaker-container" style="width: 1px; height: 1px; position: absolute; top: 110px; left: -10px;"></div>
+                <div style="position: absolute; bottom: -80px; left: 30%; transform: translateX(-50%); color: var(--ale-accent); font-size: 12px; text-align: center;">
+                    Haz clic en VOID para interactuar!
+                </div>
             </div>
         </aside>
 
-
-        <!-- Contenido principal a la derecha del sidebar -->
+        <!-- Contenido principal con diseño mejorado -->
         <div class="content-wrapper">
             <main class="content" id="main-content">
-                <!-- Encabezado visual con banner y logo -->
-                <header class="content-header" 
-                    style="
-                        position: relative;
-                        display: flex; 
-                        align-items: center; 
-                        justify-content: center;
-                        gap: 2em; 
-                        margin-bottom: 1.5em;
-                        min-height: 340px;
-                        border-radius: 12px;
-                        overflow: hidden;
+                <!-- Encabezado con gradiente ALE -->
+                <header class="content-header" style="
+                    background: linear-gradient(135deg, var(--ale-dark) 0%, var(--ale-secondary) 100%);
+                    border: 1px solid var(--ale-primary);
+                    box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
+                    position: relative;
+                    min-height: 340px;
+                    border-radius: 12px;
+                    overflow: hidden;
+                ">
+                    <img src="assets/images/banner.png" alt="Banner" style="
+                        position: absolute;
+                        width: 100%; 
+                        height: 100%; 
+                        object-fit: cover; 
+                        opacity: 0.3;
+                        z-index: 0;
                     ">
-                    <!-- Imagen de fondo con blur -->
-                    <img src="assets/images/banner.png" alt="Banner" 
-                        style="
-                            position: absolute;
-                            top: 0;
-                            left: 0; 
-                            width: 100%; 
-                            height: 100%; 
-                            object-fit: cover; 
-                            filter: blur(10px) brightness(0.7);
-                            z-index: 0;
-                        ">
-                    <!-- Contenido centrado sobre el banner -->
-                    <div style="position: relative; z-index: 1; display: flex; align-items: center; gap: 1.5em; flex-wrap: wrap;">
-                        <!-- Logo principal -->
-                        <img src="assets/images/logos/Logo.png" alt="AleEngine" style="width: 64px; height: 64px; border-radius: 12px; box-shadow: 0 2px 8px #0004;">
-                        <!-- Título y subtítulo -->
-                        <div style="text-align: center; background-color: rgba(0, 0, 0, 0.185); border-radius: 27px; padding: 10px;">
-                            <h1 id="section-title" style="margin: 0; font-size: 2.2em; color: #fff; text-shadow: 0 2px 8px #0008;">Bienvenido a la Documentación de ALE Engine</h1>
-                            <p style="margin: 0; margin-top: 0.7em; color: #e0e0e0; text-shadow: 0 1px 4px #0008; font-size: 1.15em; font-weight: 500;">
-                                Tu referencia rápida para el desarrollo de mods con ALE Engine
-                            </p>
+                    
+                    <div style="position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 2em; text-align: center;">
+                        <div style="display: flex; align-items: center; gap: 1.5em; margin-bottom: 1.5em;">
+                            <img src="assets/images/logos/Logo.png" alt="AleEngine" style="
+                                width: 80px; 
+                                height: 80px; 
+                                border: 2px solid var(--ale-accent);
+                                box-shadow: 0 0 20px var(--ale-primary);
+                                animation: alePulse 3s ease-in-out infinite;
+                            ">
                         </div>
+                        
+                        <h1 id="section-title" style="
+                            margin: 0; 
+                            font-size: 2.5em; 
+                            color: var(--ale-light); 
+                            text-shadow: 0 0 10px var(--ale-accent);
+                            background: linear-gradient(90deg, var(--ale-primary), var(--ale-accent));
+                            -webkit-background-clip: text;
+                            -webkit-text-fill-color: transparent;
+                        ">
+                            ALE Engine Documentation
+                        </h1>
+                        
+                        <p style="
+                            margin: 0; 
+                            margin-top: 1em; 
+                            color: var(--ale-light); 
+                            font-size: 1.2em; 
+                            max-width: 800px;
+                            line-height: 1.6;
+                        ">
+                            El motor definitivo para crear mods de <span class="ale-highlight" style="color: var(--ale-accent);">Friday Night Funkin'</span> con total libertad y rendimiento optimizado
+                        </p>
                     </div>
                 </header>
-                <!-- Sección principal de contenido en markdown -->
-                <section id="markdown-content" class="markdown-body" style="padding: 2em; min-height: 200px;">
-                    <!-- Presentación del motor -->
+
+                <!-- Contenido Markdown con estilo personalizado -->
+                <section id="markdown-content" class="markdown-body" style="
+                    padding: 2em; 
+                    background: rgba(26, 26, 46, 0.7); 
+                    border-radius: 12px;
+                    border: 1px solid var(--ale-primary);
+                    margin-top: 2em;
+                    backdrop-filter: blur(10px);
+                ">
+                    <!-- Sección de bienvenida -->
                     <div style="display: flex; align-items: start; gap: 1.5em; margin-bottom: 3em;">
-                        <img src="assets/images/logos/Logo.png" alt="AleEngine" style="width: 64px; height: 64px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
+                        <div style="
+                            min-width: 64px; 
+                            height: 64px; 
+                            background: linear-gradient(135deg, var(--ale-primary), var(--ale-secondary));
+                            border-radius: 12px; 
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            box-shadow: 0 0 15px var(--ale-primary);
+                        ">
+                            <span style="font-size: 24px; color: white;">✨</span>
+                        </div>
                         <div>
-                            <h2 style="margin: 0; color: #fff; font-size: 1.8em;">¿Qué es ALE Engine?</h2>
-                            <p style="font-size: 1.1em; line-height: 1.8; color: #e0e0e0; margin-top: 1em;">
-                                ALE Engine nace como una evolución natural de Friday Night Funkin', diseñado por modders para modders. Nuestra meta es simple: proporcionar un motor robusto y accesible que permita a los creadores enfocarse en dar vida a sus ideas, sin preocuparse por las limitaciones técnicas.
+                            <h2 style="margin: 0; color: var(--ale-accent); font-size: 1.8em; text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);">
+                                ¿Qué es ALE Engine?
+                            </h2>
+                            <p style="font-size: 1.1em; line-height: 1.8; color: var(--ale-light); margin-top: 1em;">
+                                ALE Engine es <span class="ale-highlight">la evolución definitiva</span> para la creación de mods de Friday Night Funkin'. Diseñado <span class="ale-highlight">por modders para modders</span>, nuestro motor combina potencia, flexibilidad y facilidad de uso en un paquete optimizado.
                             </p>
                         </div>
                     </div>
-                    <!-- Características principales -->
+
+                    <!-- Características con iconos personalizados -->
                     <div style="margin-bottom: 3em;">
-                        <h3 style="color: #fff; font-size: 1.4em; margin-bottom: 1em;">Características Fundamentales</h3>
-                        <div style="color: #e0e0e0; line-height: 1.8;">
-                            <p style="margin-bottom: 1.5em;">
-                                <strong style="color: #fff; display: block; margin-bottom: 0.5em;">Rendimiento Optimizado</strong>
-                                Hemos reescrito todo el engine arreglando componentes críticos del motor para asegurar una experiencia fluida tanto en PC como en dispositivos Android, manteniendo la fidelidad visual que los jugadores esperan.
-                            </p>
-                            <p style="margin-bottom: 1.5em;">
-                                <strong style="color: #fff; display: block; margin-bottom: 0.5em;">Sistema de Scripting Avanzado</strong>
-                                Integración completa con Lua y HScript, permitiendo modificaciones profundas del gameplay sin necesidad de recompilar. Desde simples cambios visuales hasta mecánicas completamente nuevas, las posibilidades son infinitas, tu unico limite es tu mente.
-                            </p>
-                            <p style="margin-bottom: 1.5em;">
-                                <strong style="color: #fff; display: block; margin-bottom: 0.5em;">Diseño Multiplataforma</strong>
-                                Desarrollado desde cero pensando en la compatibilidad móvil, con controles adaptables y una interfaz que responde a diferentes tamaños de pantalla y métodos de entrada.
-                            </p>
+                        <h3 style="color: var(--ale-accent); font-size: 1.4em; margin-bottom: 1em; border-bottom: 1px solid var(--ale-primary); padding-bottom: 0.5em;">
+                            🚀 Características Principales
+                        </h3>
+                        
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5em;">
+                            <!-- Tarjeta de característica 1 -->
+                            <div style="
+                                background: rgba(26, 26, 46, 0.8);
+                                border: 1px solid var(--ale-primary);
+                                border-radius: 8px;
+                                padding: 1.5em;
+                                transition: all 0.3s ease;
+                            " onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 20px rgba(138, 43, 226, 0.3)';" 
+                              onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                                <div style="
+                                    width: 50px;
+                                    height: 50px;
+                                    background: linear-gradient(135deg, var(--ale-primary), var(--ale-secondary));
+                                    border-radius: 50%;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    margin-bottom: 1em;
+                                ">
+                                    <span style="font-size: 24px; color: white;">⚡</span>
+                                </div>
+                                <h4 style="color: var(--ale-accent); margin: 0 0 0.5em 0;">Rendimiento Optimizado</h4>
+                                <p style="color: var(--ale-light); line-height: 1.6; margin: 0;">
+                                    Motor completamente reescrito para ofrecer el máximo rendimiento en PC y móviles, con soporte para hardware antiguo y nuevas tecnologías.
+                                </p>
+                            </div>
+                            
+                            <!-- Tarjeta de característica 2 -->
+                            <div style="
+                                background: rgba(26, 26, 46, 0.8);
+                                border: 1px solid var(--ale-primary);
+                                border-radius: 8px;
+                                padding: 1.5em;
+                                transition: all 0.3s ease;
+                            " onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 20px rgba(138, 43, 226, 0.3)';" 
+                              onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                                <div style="
+                                    width: 50px;
+                                    height: 50px;
+                                    background: linear-gradient(135deg, var(--ale-primary), var(--ale-secondary));
+                                    border-radius: 50%;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    margin-bottom: 1em;
+                                ">
+                                    <span style="font-size: 24px; color: white;">🎮</span>
+                                </div>
+                                <h4 style="color: var(--ale-accent); margin: 0 0 0.5em 0;">Scripting Avanzado</h4>
+                                <p style="color: var(--ale-light); line-height: 1.6; margin: 0;">
+                                    Soporte completo para Lua y HScript con APIs documentadas y ejemplos prácticos para modificar cualquier aspecto del juego.
+                                </p>
+                            </div>
+                            
+                            <!-- Tarjeta de característica 3 -->
+                            <div style="
+                                background: rgba(26, 26, 46, 0.8);
+                                border: 1px solid var(--ale-primary);
+                                border-radius: 8px;
+                                padding: 1.5em;
+                                transition: all 0.3s ease;
+                            " onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 20px rgba(138, 43, 226, 0.3)';" 
+                              onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                                <div style="
+                                    width: 50px;
+                                    height: 50px;
+                                    background: linear-gradient(135deg, var(--ale-primary), var(--ale-secondary));
+                                    border-radius: 50%;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    margin-bottom: 1em;
+                                ">
+                                    <span style="font-size: 24px; color: white;">📱</span>
+                                </div>
+                                <h4 style="color: var(--ale-accent); margin: 0 0 0.5em 0;">Multiplataforma</h4>
+                                <p style="color: var(--ale-light); line-height: 1.6; margin: 0;">
+                                    Diseñado pensando en la compatibilidad móvil desde el principio, con controles adaptables y optimización para diferentes pantallas.
+                                </p>
+                            </div>
                         </div>
                     </div>
+
                     <!-- Sección para desarrolladores -->
                     <div style="margin-bottom: 3em;">
-                        <h3 style="color: #fff; font-size: 1.4em; margin-bottom: 1em;">Para Desarrolladores</h3>
-                        <p style="color: #e0e0e0; line-height: 1.8; margin-bottom: 1.5em;">
-                            ALE Engine ofrece un entorno de desarrollo intuitivo y potente. Hemos simplificado los procesos más comunes en la creación de mods mientras mantenemos la flexibilidad que los desarrolladores necesitan:
-                        </p>
-                        <ul style="color: #e0e0e0; line-height: 1.8; list-style-type: disc; padding-left: 1.5em;">
-                            <li style="margin-bottom: 0.8em;">API documentada exhaustivamente para Lua y HScript</li>
-                            <li style="margin-bottom: 0.8em;">Sistema de eventos robusto para modificar cualquier aspecto del juego</li>
-                            <li style="margin-bottom: 0.8em;">Herramientas de depuración integradas</li>
-                            <li style="margin-bottom: 0.8em;">Flujo de trabajo optimizado para pruebas rápidas de cambios</li>
-                        </ul>
+                        <h3 style="color: var(--ale-accent); font-size: 1.4em; margin-bottom: 1em; border-bottom: 1px solid var(--ale-primary); padding-bottom: 0.5em;">
+                            👨‍💻 Para Desarrolladores
+                        </h3>
+                        
+                        <div style="
+                            background: rgba(26, 26, 46, 0.5);
+                            border-left: 4px solid var(--ale-primary);
+                            padding: 1.5em;
+                            border-radius: 0 8px 8px 0;
+                            margin-bottom: 2em;
+                        ">
+                            <p style="color: var(--ale-light); line-height: 1.8; margin: 0;">
+                                ALE Engine ofrece un entorno de desarrollo <span class="ale-highlight">intuitivo y potente</span>, diseñado para agilizar tu flujo de trabajo y permitirte concentrarte en lo que realmente importa: <span class="ale-highlight">tu creatividad</span>.
+                            </p>
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1em; margin-top: 1.5em;">
+                            <div style="
+                                background: rgba(138, 43, 226, 0.1);
+                                border: 1px solid var(--ale-primary);
+                                border-radius: 8px;
+                                padding: 1em;
+                                display: flex;
+                                align-items: center;
+                                gap: 0.8em;
+                            ">
+                                <span style="
+                                    background: rgba(0, 255, 255, 0.2);
+                                    width: 30px;
+                                    height: 30px;
+                                    border-radius: 50%;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    color: var(--ale-accent);
+                                ">✔</span>
+                                <span style="color: var(--ale-light);">API completa para Lua/HScript</span>
+                            </div>
+                            
+                            <div style="
+                                background: rgba(138, 43, 226, 0.1);
+                                border: 1px solid var(--ale-primary);
+                                border-radius: 8px;
+                                padding: 1em;
+                                display: flex;
+                                align-items: center;
+                                gap: 0.8em;
+                            ">
+                                <span style="
+                                    background: rgba(0, 255, 255, 0.2);
+                                    width: 30px;
+                                    height: 30px;
+                                    border-radius: 50%;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    color: var(--ale-accent);
+                                ">🔧</span>
+                                <span style="color: var(--ale-light);">Herramientas de depuración</span>
+                            </div>
+                            
+                            <div style="
+                                background: rgba(138, 43, 226, 0.1);
+                                border: 1px solid var(--ale-primary);
+                                border-radius: 8px;
+                                padding: 1em;
+                                display: flex;
+                                align-items: center;
+                                gap: 0.8em;
+                            ">
+                                <span style="
+                                    background: rgba(0, 255, 255, 0.2);
+                                    width: 30px;
+                                    height: 30px;
+                                    border-radius: 50%;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    color: var(--ale-accent);
+                                ">⚙️</span>
+                                <span style="color: var(--ale-light);">Sistema de eventos robusto</span>
+                            </div>
+                            
+                            <div style="
+                                background: rgba(138, 43, 226, 0.1);
+                                border: 1px solid var(--ale-primary);
+                                border-radius: 8px;
+                                padding: 1em;
+                                display: flex;
+                                align-items: center;
+                                gap: 0.8em;
+                            ">
+                                <span style="
+                                    background: rgba(0, 255, 255, 0.2);
+                                    width: 30px;
+                                    height: 30px;
+                                    border-radius: 50%;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    color: var(--ale-accent);
+                                ">🚀</span>
+                                <span style="color: var(--ale-light);">Hot-reloading de assets</span>
+                            </div>
+                        </div>
                     </div>
-                    <!-- Pie de página de la sección principal -->
-                    <div style="margin-top: 4em; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2em;">
-                        <p style="color: #e0e0e0; text-align: center; font-size: 1.1em;">
-                            Explora la documentación para descubrir todo lo que puedes crear con ALE Engine. <br>
-                            Con amor <a href="https://github.com/ALE-Engine-Crew" target="_blank" rel="noopener noreferrer"> ALE Engine Crew</a> <strong><3</strong>
+
+                    <!-- Pie de página con estilo ALE -->
+                    <div style="
+                        margin-top: 4em; 
+                        border-top: 1px solid var(--ale-primary);
+                        padding-top: 2em;
+                        text-align: center;
+                    ">
+                        <p style="color: var(--ale-light); font-size: 1.1em; line-height: 1.6;">
+                            Explora las posibilidades infinitas que ofrece <span style="color: var(--ale-accent);">ALE Engine</span> para crear mods increíbles.<br>
+                            Con amor desde el <a href="https://github.com/ALE-Engine-Crew" target="_blank" rel="noopener noreferrer" style="color: var(--ale-primary); text-decoration: none;">Equipo ALE</a> ❤️
                         </p>
+                        
+                        <div style="
+                            display: flex;
+                            justify-content: center;
+                            gap: 1em;
+                            margin-top: 1.5em;
+                        ">
+                            <a href="#" style="
+                                background: linear-gradient(135deg, var(--ale-primary), var(--ale-secondary));
+                                color: white;
+                                padding: 0.5em 1.5em;
+                                border-radius: 50px;
+                                text-decoration: none;
+                                font-weight: bold;
+                                transition: all 0.3s ease;
+                            " onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 0 15px var(--ale-primary)';" 
+                              onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';">
+                                Empezar
+                            </a>
+                            
+                            <a href="#" style="
+                                background: transparent;
+                                color: var(--ale-accent);
+                                padding: 0.5em 1.5em;
+                                border-radius: 50px;
+                                text-decoration: none;
+                                font-weight: bold;
+                                border: 2px solid var(--ale-primary);
+                                transition: all 0.3s ease;
+                            " onmouseover="this.style.background='rgba(138, 43, 226, 0.1)';" 
+                              onmouseout="this.style.background='transparent';">
+                                GitHub
+                            </a>
+                        </div>
                     </div>
                 </section>
-                <!-- Indicador de carga de documentación -->
+                
                 <div id="loading-indicator" style="display:none; text-align:center; margin-top:2em;">
-                    <span style="font-size:1.1em;">Cargando documentación...</span>
+                    <div style="
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 0.8em;
+                        background: rgba(26, 26, 46, 0.8);
+                        padding: 1em 2em;
+                        border-radius: 50px;
+                        border: 1px solid var(--ale-primary);
+                    ">
+                        <div style="
+                            width: 20px;
+                            height: 20px;
+                            border: 3px solid var(--ale-primary);
+                            border-top-color: transparent;
+                            border-radius: 50%;
+                            animation: spin 1s linear infinite;
+                        "></div>
+                        <span style="color: var(--ale-accent);">Cargando documentación...</span>
+                    </div>
                 </div>
             </main>
-            <aside class="toc-container" id="toc">
-                <div class="toc-header">En esta página</div>
-                <nav class="toc-nav">Hola :)</nav>
+            
+            <aside class="toc-container" id="toc" style="
+                background: rgba(26, 26, 46, 0.8);
+                border: 1px solid var(--ale-primary);
+                border-radius: 8px;
+            ">
+                <div class="toc-header" style="
+                    background: linear-gradient(90deg, var(--ale-dark), var(--ale-primary));
+                    color: white;
+                    padding: 0.8em 1em;
+                    border-radius: 8px 8px 0 0;
+                    font-weight: bold;
+                ">
+                    📚 En esta página
+                </div>
+                <nav class="toc-nav" style="padding: 1em; color: var(--ale-light);">Hola :)</nav>
             </aside>
         </div>
     </div>
-    <!-- Scripts JS necesarios para la funcionalidad de la página -->
+
+    <!-- Scripts con estilo personalizado -->
     <div class="scripts">
-        <script src="source/sidebar.js"></script> <!-- Lógica del sidebar -->
-        <script src="source/copyButton.js"></script> <!-- Botón para copiar código -->
-        <script src="source/loadMd.js"></script> <!-- Carga de archivos Markdown -->
-        <script src="source/toast.js"></script> <!-- Notificaciones tipo toast -->
-        <script src="source/TOC.js"></script> <!-- Tabla de contenidos automática -->
-        <script src="source/search.js"></script> <!-- Buscador de la documentación -->
-        <script src="source/voidPhaser.js"></script> <!-- Script para animaciones de Void -->
+        <script src="source/sidebar.js"></script>
+        <script src="source/copyButton.js"></script>
+        <script src="source/loadMd.js"></script>
+        <script src="source/toast.js"></script>
+        <script src="source/TOC.js"></script>
+        <script src="source/search.js"></script>
+        <script src="source/voidPhaser.js"></script>
     </div>
-    <!-- Hojas de estilo CSS -->
+
+    <!-- Estilos personalizados -->
     <div class="styles">
-        <link rel="stylesheet" href="assets/styles/main.css"> <!-- Estilos principales -->
-        <link rel="stylesheet" href="assets/styles/android.css"> <!-- Estilos específicos para Android -->
-        <link rel="stylesheet" href="assets/styles/anims.css"> <!-- Animaciones -->
+        <link rel="stylesheet" href="assets/styles/main.css">
+        <link rel="stylesheet" href="assets/styles/android.css">
+        <link rel="stylesheet" href="assets/styles/anims.css">
+        
+        <style>
+            /* Estilos generales */
+            body {
+                background: linear-gradient(135deg, #0F0C29 0%, #1A1A2E 100%);
+                color: var(--ale-light);
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+            
+            /* Barra de scroll personalizada */
+            ::-webkit-scrollbar {
+                width: 10px;
+            }
+            
+            ::-webkit-scrollbar-track {
+                background: var(--ale-dark);
+            }
+            
+            ::-webkit-scrollbar-thumb {
+                background: var(--ale-primary);
+                border-radius: 5px;
+            }
+            
+            ::-webkit-scrollbar-thumb:hover {
+                background: var(--ale-accent);
+            }
+            
+            /* Efectos de hover para las tarjetas */
+            .feature-card {
+                transition: all 0.3s ease;
+            }
+            
+            .feature-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(138, 43, 226, 0.3);
+            }
+        </style>
     </div>
 </body>
 </html>

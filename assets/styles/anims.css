@@ -1,15 +1,3 @@
-@keyframes floatY {
-    0% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-4px);
-    }
-    100% {
-        transform: translateY(0);
-    }
-}
-
 /* Estilos para el highlight de encabezados */
 @keyframes headingHighlight {
     0% {
