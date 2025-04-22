@@ -48,7 +48,6 @@
             <div id="void-animation-container">
                 <div id="void-container"></div>
                 <div id="speaker-container"></div>
-                <div class="void-instruction">Haz clic en VOID para interactuar!</div>
             </div>
         </aside>
 
@@ -182,59 +181,16 @@
         </div>
     </div>
 
-    <!-- Scripts con estilo personalizado -->
-    <div class="scripts">
-        <script src="source/sidebar.js"></script>
-        <script src="source/copyButton.js"></script>
-        <script src="source/loadMd.js"></script>
-        <script src="source/toast.js"></script>
-        <script src="source/TOC.js"></script>
-        <script src="source/search.js"></script>
-        <script src="source/voidPhaser.js"></script>
-    </div>
+    <!-- Overlay para el sidebar en móviles -->
+    <div class="sidebar-overlay"></div>
 
-    <!-- Estilos personalizados -->
-    <div class="styles">
-        <link rel="stylesheet" href="assets/styles/main.css">
-        <link rel="stylesheet" href="assets/styles/android.css">
-        <link rel="stylesheet" href="assets/styles/anims.css">
-        
-        <style>
-            /* Estilos generales */
-            body {
-                background: linear-gradient(135deg, #0F0C29 0%, #1A1A2E 100%);
-                color: var(--ale-light);
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            }
-            
-            /* Barra de scroll personalizada */
-            ::-webkit-scrollbar {
-                width: 10px;
-            }
-            
-            ::-webkit-scrollbar-track {
-                background: var(--ale-dark);
-            }
-            
-            ::-webkit-scrollbar-thumb {
-                background: var(--ale-primary);
-                border-radius: 5px;
-            }
-            
-            ::-webkit-scrollbar-thumb:hover {
-                background: var(--ale-accent);
-            }
-            
-            /* Efectos de hover para las tarjetas */
-            .feature-card {
-                transition: all 0.3s ease;
-            }
-            
-            .feature-card:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 10px 20px rgba(138, 43, 226, 0.3);
-            }
-        </style>
-    </div>
+    <!-- Scripts -->
+    <script src="source/sidebar.js"></script>
+    <script src="source/copyButton.js"></script>
+    <script src="source/loadMd.js"></script>
+    <script src="source/toast.js"></script>
+    <script src="source/TOC.js"></script>
+    <script src="source/search.js"></script>
+    <script src="source/voidPhaser.js"></script>
 </body>
 </html>

@@ -1,87 +1,74 @@
-const sidebar = document.getElementById('sidebar');
-const sidebarToggle = document.getElementById('sidebar-toggle');
-const sidebarClose = document.getElementById('sidebar-close');
-const mainContent = document.getElementById('main-content');
-
-// Estado inicial según pantalla
-function setSidebarInitialState() {
+document.addEventListener('DOMContentLoaded', function() {
+    const sidebar = document.getElementById('sidebar');
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    const sidebarClose = document.getElementById('sidebar-close');
     const container = document.querySelector('.container');
-    // Solo ajustar el estado si el sidebar NO está abierto
-    if (!sidebar.classList.contains('sidebar-open')) {
+    const sidebarOverlay = document.createElement('div');
+    sidebarOverlay.className = 'sidebar-overlay';
+    document.body.appendChild(sidebarOverlay);
+
+    // Estado inicial
+    function setInitialState() {
         if (window.innerWidth <= 900) {
-            sidebar.classList.remove('sidebar-closed');
+            // Mobile: sidebar cerrado por defecto
+            sidebar.classList.remove('sidebar-open');
+            sidebarOverlay.style.display = 'none';
             container.classList.remove('sidebar-closed');
         } else {
-            sidebar.classList.remove('sidebar-open');
-            sidebar.classList.add('sidebar-closed');
-            container.classList.add('sidebar-closed');
+            // Desktop: sidebar abierto por defecto
+            sidebar.classList.add('sidebar-open');
+            sidebarOverlay.style.display = 'none';
+            container.classList.remove('sidebar-closed');
         }
     }
-}
 
-function toggleSidebar() {
-    const container = document.querySelector('.container');
-    
-    if (sidebar.classList.contains('sidebar-closed')) {
-        openSidebar();
-        setTimeout(() => {
-            container.classList.remove('sidebar-closed');
-        }, 50);
-    } else {
-        closeSidebar();
-        setTimeout(() => {
+    // Alternar sidebar
+    function toggleSidebar(e) {
+        e.stopPropagation();
+        if (sidebar.classList.contains('sidebar-open')) {
+            closeSidebar();
+        } else {
+            openSidebar();
+        }
+    }
+
+    function openSidebar() {
+        sidebar.classList.add('sidebar-open');
+        if (window.innerWidth <= 900) {
+            sidebarOverlay.style.display = 'block';
+        }
+        container.classList.remove('sidebar-closed');
+    }
+
+    function closeSidebar() {
+        sidebar.classList.remove('sidebar-open');
+        sidebarOverlay.style.display = 'none';
+        
+        // En desktop, añadir clase closed al container para mover el contenido
+        if (window.innerWidth > 900) {
             container.classList.add('sidebar-closed');
-            console.log('Sidebar closed');
-        }, 50);
+        } else {
+            container.classList.remove('sidebar-closed');
+        }
     }
-}
 
-function openSidebar() {
-    sidebar.classList.remove('sidebar-closed');
-    sidebar.classList.add('sidebar-open');
-    document.querySelector('.container').classList.remove('sidebar-closed');
-    document.body.classList.add('sidebar-open');
-}
+    // Event listeners
+    sidebarToggle.addEventListener('click', toggleSidebar);
+    sidebarClose.addEventListener('click', closeSidebar);
+    
+    // Cerrar al hacer clic en el overlay (solo móviles)
+    sidebarOverlay.addEventListener('click', function() {
+        if (window.innerWidth <= 900) {
+            closeSidebar();
+        }
+    });
 
-function closeSidebar() {
-    if (!sidebar) return;
-    sidebar.classList.remove('sidebar-open');
-    document.body.classList.remove('sidebar-open');
-    if (window.innerWidth > 900) {
-        sidebar.classList.add('sidebar-closed');
-        document.querySelector('.container').classList.add('sidebar-closed');
-    } else {
-        sidebar.classList.remove('sidebar-closed'); // Remove sidebar-closed on mobile
-        document.querySelector('.container').classList.remove('sidebar-closed'); // Also remove from container
-    }
-}
+    // Evitar que se cierre al hacer clic dentro del sidebar
+    sidebar.addEventListener('click', function(e) {
+        e.stopPropagation();
+    });
 
-// Elimina todos los listeners anteriores y déjalos así:
-setSidebarInitialState();
-window.addEventListener('resize', setSidebarInitialState);
-
-// Botón hamburguesa
-sidebarToggle.addEventListener('click', (e) => {
-    e.stopPropagation();
-    toggleSidebar(); // Cambiamos openSidebar() por toggleSidebar()
-});
-
-// Botón de cerrar
-sidebarClose.addEventListener('click', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    closeSidebar();
-});
-
-// Click fuera para cerrar
-document.addEventListener('click', (e) => {
-    const isOpen = sidebar.classList.contains('sidebar-open');
-    const isMobile = window.innerWidth <= 900;
-    const clickedOutside = !sidebar.contains(e.target);
-    const notToggleButton = e.target !== sidebarToggle;
-    const notCloseButton = e.target !== sidebarClose;
-
-    if (isOpen && isMobile && clickedOutside && notToggleButton && notCloseButton) {
-        closeSidebar(); // Add this line to actually close the sidebar
-    }
+    // Inicializar
+    setInitialState();
+    window.addEventListener('resize', setInitialState);
 });
